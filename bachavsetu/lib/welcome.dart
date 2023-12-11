@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/login.dart';
+import 'login.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -19,9 +19,12 @@ class _WelcomeState extends State<Welcome> {
           padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
           child: Column(
             children: [
-              Image.asset(
-                'assets/loginAssets/illustration-1.png',
-                width: 240,
+              Hero(
+                tag: 'logoTag',
+                child: Image.asset(
+                  'assets/loginAssets/illustration-1.png',
+                  width: 240,
+                ),
               ),
               SizedBox(
                 height: 18,
@@ -52,9 +55,7 @@ class _WelcomeState extends State<Welcome> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
+                    Navigator.of(context).push(_createPageRoute());
                   },
                   style: ButtonStyle(
                     foregroundColor:
@@ -80,6 +81,35 @@ class _WelcomeState extends State<Welcome> {
           ),
         ),
       ),
+    );
+  }
+
+  PageRouteBuilder _createPageRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => Login(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = 0.0;
+        const end = 1.0;
+        var curve = Curves.easeInOut;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        var opacityAnimation = animation.drive(tween);
+
+        var scaleTween =
+            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+
+        var scaleAnimation = animation.drive(scaleTween);
+
+        return Opacity(
+          opacity: opacityAnimation.value,
+          child: Transform.scale(
+            scale: scaleAnimation.value,
+            child: child,
+          ),
+        );
+      },
     );
   }
 }

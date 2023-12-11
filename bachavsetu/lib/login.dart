@@ -33,15 +33,18 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 18,
               ),
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50,
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(
-                  'assets/loginAssets/illustration-2.png',
+              Hero(
+                tag: 'logoTag',
+                child: Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade50,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    'assets/loginAssets/illustration-2.png',
+                  ),
                 ),
               ),
               SizedBox(
@@ -85,11 +88,13 @@ class _LoginState extends State<Login> {
                       ),
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.circular(10)),
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black12),
-                            borderRadius: BorderRadius.circular(10)),
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         prefix: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
@@ -115,7 +120,19 @@ class _LoginState extends State<Login> {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => Otp()),
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      FadeTransition(
+                                opacity: animation,
+                                child: ScaleTransition(
+                                  scale: Tween<double>(begin: 0.0, end: 1.0)
+                                      .animate(animation),
+                                  child: Otp(),
+                                ),
+                              ),
+                              transitionDuration: Duration(milliseconds: 500),
+                            ),
                           );
                         },
                         style: ButtonStyle(
