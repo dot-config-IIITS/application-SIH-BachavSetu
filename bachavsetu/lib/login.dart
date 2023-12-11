@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'otp.dart';
 
 class Login extends StatefulWidget {
@@ -114,6 +115,8 @@ class _LoginState extends State<Login> {
                 children: [
                   TextFormField(
                     controller: phoneNumberController,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    maxLength: 10,
                     keyboardType: TextInputType.number,
                     style: const TextStyle(
                       fontSize: 18,
@@ -153,6 +156,10 @@ class _LoginState extends State<Login> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (isValidPhoneNumber()) {
+                          // Implement the Logic to send to OTP (dart) and Handle AUTH
+                          String phoneNumber = phoneNumberController.text;
+                          print('Phone Number : $phoneNumber');
+
                           Navigator.of(context).push(
                             PageRouteBuilder(
                               pageBuilder:

@@ -27,28 +27,28 @@ class _FormPageState extends State<FormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff7f6fb),
+      backgroundColor: const Color(0xfff7f6fb),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
             child: Column(
               children: [
                 Align(
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_back,
                       size: 32,
                       color: Colors.black54,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 18,
                 ),
-                Text(
+                const Text(
                   'User Information',
                   style: TextStyle(
                     fontSize: 22,
@@ -56,11 +56,11 @@ class _FormPageState extends State<FormPage> {
                     color: Colors.purple, // Title color
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 28,
                 ),
                 Container(
-                  padding: EdgeInsets.all(28),
+                  padding: const EdgeInsets.all(28),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
@@ -69,14 +69,14 @@ class _FormPageState extends State<FormPage> {
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 3,
                         blurRadius: 6,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
                   child: Column(
                     children: [
                       _buildTextField(label: 'Name'),
-                      SizedBox(height: 18),
+                      const SizedBox(height: 18),
                       _buildDatePickerRow(
                         label: 'Date of Birth',
                         selectedDate: selectedDOB,
@@ -86,7 +86,7 @@ class _FormPageState extends State<FormPage> {
                           });
                         },
                       ),
-                      SizedBox(height: 18),
+                      const SizedBox(height: 18),
                       _buildDropdownRow(
                         label: 'Gender',
                         value: selectedGender,
@@ -97,7 +97,7 @@ class _FormPageState extends State<FormPage> {
                         },
                         items: genderOptions,
                       ),
-                      SizedBox(height: 18),
+                      const SizedBox(height: 18),
                       _buildDropdownRow(
                         label: 'Blood Group',
                         value: selectedBloodGroup,
@@ -108,16 +108,40 @@ class _FormPageState extends State<FormPage> {
                         },
                         items: bloodGroupOptions,
                       ),
-                      SizedBox(height: 18),
-                      _buildTextField(
-                        label: 'Emergency Contact',
-                        keyboardType: TextInputType.phone,
+                      const SizedBox(height: 18),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        child: TextFormField(
+                          keyboardType: TextInputType.phone,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: "Emergency Contact",
+                            labelStyle: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.purple, // Label color
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.purple),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.purple),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
                       ),
-                      SizedBox(height: 18),
+                      const SizedBox(height: 18),
                       _buildTextField(
                         label: 'Relationship with Emergency Contact',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 22,
                       ),
                       SizedBox(
@@ -138,7 +162,7 @@ class _FormPageState extends State<FormPage> {
                               ),
                             ),
                           ),
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.all(14.0),
                             child: Text(
                               'Submit',
@@ -160,26 +184,26 @@ class _FormPageState extends State<FormPage> {
 
   Widget _buildTextField({required String label, TextInputType? keyboardType}) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
         keyboardType: keyboardType ?? TextInputType.text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.purple, // Label color
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple),
+            borderSide: const BorderSide(color: Colors.purple),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple),
+            borderSide: const BorderSide(color: Colors.purple),
             borderRadius: BorderRadius.circular(12),
           ),
         ),
@@ -197,15 +221,15 @@ class _FormPageState extends State<FormPage> {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.purple, // Label color
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.black12),
@@ -215,7 +239,7 @@ class _FormPageState extends State<FormPage> {
             children: [
               Text(
                 "${selectedDate.toLocal()}".split(' ')[0],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black, // Date color
@@ -223,7 +247,7 @@ class _FormPageState extends State<FormPage> {
               ),
               GestureDetector(
                 onTap: () => _selectDate(context, selectedDate, onDateChanged),
-                child: Icon(
+                child: const Icon(
                   Icons.calendar_today,
                   size: 24,
                   color: Colors.purple, // Calendar icon color
@@ -248,7 +272,7 @@ class _FormPageState extends State<FormPage> {
       lastDate: DateTime(2101),
     ))!;
 
-    if (picked != null && picked != selectedDate) {
+    if (picked != selectedDate) {
       onDateChanged(picked);
     }
   }
@@ -260,13 +284,13 @@ class _FormPageState extends State<FormPage> {
     required List<String> items,
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.purple, // Label color
