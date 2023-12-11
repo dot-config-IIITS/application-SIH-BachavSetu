@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'form.dart';
 
 class Otp extends StatefulWidget {
   const Otp({Key? key}) : super(key: key);
@@ -80,13 +81,17 @@ class _OtpState extends State<Otp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                            child: _textFieldOTP(first: true, last: false)),
+                          child: _textFieldOTP(first: true, last: false),
+                        ),
                         Expanded(
-                            child: _textFieldOTP(first: false, last: false)),
+                          child: _textFieldOTP(first: false, last: false),
+                        ),
                         Expanded(
-                            child: _textFieldOTP(first: false, last: false)),
+                          child: _textFieldOTP(first: false, last: false),
+                        ),
                         Expanded(
-                            child: _textFieldOTP(first: false, last: true)),
+                          child: _textFieldOTP(first: false, last: true),
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -95,7 +100,11 @@ class _OtpState extends State<Otp> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // Perform OTP verification logic
+                          // If verification successful, navigate to FormPage
+                          Navigator.of(context).push(_createPageRoute());
+                        },
                         style: ButtonStyle(
                           foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.white),
@@ -183,6 +192,35 @@ class _OtpState extends State<Otp> {
           ),
         ),
       ),
+    );
+  }
+
+  PageRouteBuilder _createPageRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => FormPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = 0.0;
+        const end = 1.0;
+        var curve = Curves.easeInOut;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        var opacityAnimation = animation.drive(tween);
+
+        var scaleTween =
+            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+
+        var scaleAnimation = animation.drive(scaleTween);
+
+        return Opacity(
+          opacity: opacityAnimation.value,
+          child: Transform.scale(
+            scale: scaleAnimation.value,
+            child: child,
+          ),
+        );
+      },
     );
   }
 }
