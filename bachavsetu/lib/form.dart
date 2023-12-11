@@ -11,6 +11,8 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   String selectedGender = 'Male';
   TextEditingController emergencyPhoneNumberCon = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController relationEmergencyContact = TextEditingController();
   String selectedBloodGroup = 'A+';
   DateTime selectedDOB = DateTime.now();
   List<String> genderOptions = [
@@ -107,7 +109,7 @@ class _FormPageState extends State<FormPage> {
                   ),
                   child: Column(
                     children: [
-                      _buildTextField(label: 'Name'),
+                      _buildTextField(label: 'Name', con: name),
                       const SizedBox(height: 18),
                       _buildDatePickerRow(
                         label: 'Date of Birth',
@@ -185,6 +187,7 @@ class _FormPageState extends State<FormPage> {
                       const SizedBox(height: 18),
                       _buildTextField(
                         label: 'Relationship with Emergency Contact',
+                        con: relationEmergencyContact,
                       ),
                       const SizedBox(
                         height: 22,
@@ -196,6 +199,16 @@ class _FormPageState extends State<FormPage> {
                             // Handle form submission
                             if (isValidPhoneNumber() == false) {
                               showInvalidPhoneNumberPopup(context);
+                            }
+
+                            if (name.text == "") {
+                              print(
+                                  "USER DIDN'T ENTER NAMEEEEEEEEEEEEEEEEEEEE");
+                            } else if (relationEmergencyContact.text == "") {
+                              print("USER DIDN'T ENTER FAMILY NAME");
+                            } else {
+                              print(name.text);
+                              print(relationEmergencyContact.text);
                             }
                           },
                           style: ButtonStyle(
@@ -230,10 +243,14 @@ class _FormPageState extends State<FormPage> {
     );
   }
 
-  Widget _buildTextField({required String label, TextInputType? keyboardType}) {
+  Widget _buildTextField(
+      {required String label,
+      TextInputType? keyboardType,
+      required TextEditingController con}) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
+        controller: con,
         keyboardType: keyboardType ?? TextInputType.text,
         style: const TextStyle(
           fontSize: 18,
