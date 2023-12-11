@@ -312,15 +312,19 @@ class _FormPageState extends State<FormPage> {
     DateTime selectedDate,
     ValueChanged<DateTime> onDateChanged,
   ) async {
-    final DateTime picked = (await showDatePicker(
+    final DateTime? picked = (await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(1900),
       lastDate: DateTime(2101),
-    ))!;
+    ));
 
     if (picked != selectedDate) {
-      onDateChanged(picked);
+      if (picked == null) {
+        onDateChanged(selectedDOB);
+      } else {
+        onDateChanged(picked);
+      }
     }
   }
 
