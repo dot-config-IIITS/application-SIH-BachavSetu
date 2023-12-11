@@ -160,22 +160,7 @@ class _LoginState extends State<Login> {
                           String phoneNumber = phoneNumberController.text;
                           print('Phone Number : $phoneNumber');
 
-                          Navigator.of(context).push(
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      FadeTransition(
-                                opacity: animation,
-                                child: ScaleTransition(
-                                  scale: Tween<double>(begin: 0.0, end: 1.0)
-                                      .animate(animation),
-                                  child: const Otp(),
-                                ),
-                              ),
-                              transitionDuration:
-                                  const Duration(milliseconds: 500),
-                            ),
-                          );
+                          Navigator.of(context).push(_createPageRoute());
                         } else {
                           showInvalidPhoneNumberPopup(context);
                         }
@@ -207,6 +192,35 @@ class _LoginState extends State<Login> {
           ],
         ),
       ),
+    );
+  }
+
+  PageRouteBuilder _createPageRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => const Otp(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = 0.0;
+        const end = 1.0;
+        var curve = Curves.easeInOut;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        var opacityAnimation = animation.drive(tween);
+
+        var scaleTween =
+            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+
+        var scaleAnimation = animation.drive(scaleTween);
+
+        return Opacity(
+          opacity: opacityAnimation.value,
+          child: Transform.scale(
+            scale: scaleAnimation.value,
+            child: child,
+          ),
+        );
+      },
     );
   }
 }

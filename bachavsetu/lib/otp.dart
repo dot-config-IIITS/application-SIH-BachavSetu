@@ -107,15 +107,18 @@ class _OtpState extends State<Otp> {
               const SizedBox(
                 height: 18,
               ),
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50,
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(
-                  'assets/loginAssets/illustration-3.png',
+              Hero(
+                tag: 'logoTag',
+                child: Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade50,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    'assets/loginAssets/illustration-3.png',
+                  ),
                 ),
               ),
               const SizedBox(
