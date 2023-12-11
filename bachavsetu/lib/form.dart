@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);
@@ -9,9 +10,15 @@ class FormPage extends StatefulWidget {
 
 class _FormPageState extends State<FormPage> {
   String selectedGender = 'Male';
+  TextEditingController emergencyPhoneNumberCon = TextEditingController();
   String selectedBloodGroup = 'A+';
   DateTime selectedDOB = DateTime.now();
-  List<String> genderOptions = ['Male', 'Female', 'Others'];
+  List<String> genderOptions = [
+    'Male',
+    'Female',
+    'Prefer not to say',
+    'Others'
+  ];
   List<String> bloodGroupOptions = [
     'A+',
     'B+',
@@ -23,6 +30,31 @@ class _FormPageState extends State<FormPage> {
     'O-'
   ];
 
+  bool isValidPhoneNumber() {
+    return emergencyPhoneNumberCon.text.replaceAll(RegExp(r'\D'), '').length ==
+        10;
+  }
+
+  void showInvalidPhoneNumberPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Invalid Phone Number"),
+          content: const Text("Please enter a valid 10-digit phone number."),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +63,7 @@ class _FormPageState extends State<FormPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 15),
             child: Column(
               children: [
                 Align(
@@ -112,12 +144,25 @@ class _FormPageState extends State<FormPage> {
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 8),
                         child: TextFormField(
+                          controller: emergencyPhoneNumberCon,
+                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                          maxLength: 10,
                           keyboardType: TextInputType.phone,
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                           decoration: InputDecoration(
+                            prefix: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                '(+91)',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                             labelText: "Emergency Contact",
                             labelStyle: const TextStyle(
                               fontSize: 18,
@@ -149,6 +194,9 @@ class _FormPageState extends State<FormPage> {
                         child: ElevatedButton(
                           onPressed: () {
                             // Handle form submission
+                            if (isValidPhoneNumber() == false) {
+                              showInvalidPhoneNumberPopup(context);
+                            }
                           },
                           style: ButtonStyle(
                             foregroundColor:
@@ -232,7 +280,6 @@ class _FormPageState extends State<FormPage> {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.black12),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
