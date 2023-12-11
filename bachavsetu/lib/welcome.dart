@@ -13,10 +13,10 @@ class _WelcomeState extends State<Welcome> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff7f6fb),
+      backgroundColor: const Color(0xfff7f6fb),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
           child: Column(
             children: [
               Hero(
@@ -26,20 +26,20 @@ class _WelcomeState extends State<Welcome> {
                   width: 240,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 18,
               ),
-              Text(
+              const Text(
                 "Let's get started",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Never A Better Time Than Now To Start.",
                 style: TextStyle(
                   fontSize: 14,
@@ -48,7 +48,7 @@ class _WelcomeState extends State<Welcome> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 38,
               ),
               SizedBox(
@@ -68,7 +68,7 @@ class _WelcomeState extends State<Welcome> {
                       ),
                     ),
                   ),
-                  child: Padding(
+                  child: const Padding(
                     padding: EdgeInsets.all(14.0),
                     child: Text(
                       'Login',
@@ -86,7 +86,7 @@ class _WelcomeState extends State<Welcome> {
 
   PageRouteBuilder _createPageRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => Login(),
+      pageBuilder: (context, animation, secondaryAnimation) => const Login(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = 0.0;
         const end = 1.0;

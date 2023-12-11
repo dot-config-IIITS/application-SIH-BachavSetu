@@ -31,14 +31,14 @@ class _LoginState extends State<Login> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Invalid Phone Number"),
-          content: Text("Please enter a valid 10-digit phone number."),
+          title: const Text("Invalid Phone Number"),
+          content: const Text("Please enter a valid 10-digit phone number."),
           actions: [
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text("OK"),
+              child: const Text("OK"),
             ),
           ],
         );
