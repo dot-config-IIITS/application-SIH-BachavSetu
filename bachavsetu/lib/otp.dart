@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'form.dart';
 
 class Otp extends StatefulWidget {
@@ -9,6 +10,79 @@ class Otp extends StatefulWidget {
 }
 
 class _OtpState extends State<Otp> {
+  late int _resendTimerInSeconds;
+  late Timer _resendTimer;
+  bool _resendButtonEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _resendTimerInSeconds = 30;
+    _resendTimer = Timer.periodic(const Duration(seconds: 1), _updateTimer);
+  }
+
+  @override
+  void dispose() {
+    _resendTimer.cancel();
+    super.dispose();
+  }
+
+  void _updateTimer(Timer timer) {
+    setState(() {
+      if (_resendTimerInSeconds > 0) {
+        _resendTimerInSeconds--;
+      } else {
+        _resendButtonEnabled = true;
+        _resendTimer.cancel();
+      }
+    });
+  }
+
+  void _resendOtp() {
+    // Add logic to resend OTP
+
+    setState(() {
+      _resendButtonEnabled = false;
+      _resendTimerInSeconds = 60;
+      _resendTimer = Timer.periodic(const Duration(seconds: 1), _updateTimer);
+    });
+  }
+
+  Widget _textFieldOTP({bool? first, last}) {
+    return Container(
+      height: 85,
+      child: AspectRatio(
+        aspectRatio: 1.0,
+        child: TextField(
+          autofocus: true,
+          onChanged: (value) {
+            if (value.length == 1 && last == false) {
+              FocusScope.of(context).nextFocus();
+            }
+            if (value.isEmpty && first == false) {
+              FocusScope.of(context).previousFocus();
+            }
+          },
+          showCursor: false,
+          readOnly: false,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          keyboardType: TextInputType.number,
+          maxLength: 1,
+          decoration: InputDecoration(
+            counter: const Offstage(),
+            enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(width: 2, color: Colors.black12),
+                borderRadius: BorderRadius.circular(12)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(width: 2, color: Colors.purple),
+                borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,70 +199,38 @@ class _OtpState extends State<Otp> {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: _resendButtonEnabled ? _resendOtp : null,
+                      child: Text(
+                        "Resend New Code",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: _resendButtonEnabled
+                              ? Colors.purple
+                              : Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'In $_resendTimerInSeconds Seconds',
+                      style: TextStyle(
+                        color:
+                            _resendButtonEnabled ? Colors.black38 : Colors.red,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 18,
-              ),
-              const Text(
-                "Didn't you receive any code?",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 18,
-              ),
-              const Text(
-                "Resend New Code",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple,
-                ),
-                textAlign: TextAlign.center,
-              ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _textFieldOTP({bool? first, last}) {
-    return Container(
-      height: 85,
-      child: AspectRatio(
-        aspectRatio: 1.0,
-        child: TextField(
-          autofocus: true,
-          onChanged: (value) {
-            if (value.length == 1 && last == false) {
-              FocusScope.of(context).nextFocus();
-            }
-            if (value.isEmpty && first == false) {
-              FocusScope.of(context).previousFocus();
-            }
-          },
-          showCursor: false,
-          readOnly: false,
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          keyboardType: TextInputType.number,
-          maxLength: 1,
-          decoration: InputDecoration(
-            counter: const Offstage(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 2, color: Colors.purple),
-                borderRadius: BorderRadius.circular(12)),
           ),
         ),
       ),
