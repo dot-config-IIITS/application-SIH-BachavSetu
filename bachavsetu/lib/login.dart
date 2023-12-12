@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'socket_manager.dart';
 import 'otp.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
   _LoginState createState() => _LoginState();
+
+  static getPhoneNumber() {
+    return _LoginState.getPhoneNumber();
+  }
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController phoneNumberController = TextEditingController();
+  static TextEditingController phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +28,7 @@ class _LoginState extends State<Login> {
   }
 
   bool isValidPhoneNumber() {
-    return phoneNumberController.text.replaceAll(RegExp(r'\D'), '').length ==
-        10;
+    return phoneNumberController.text.replaceAll(RegExp(r'\D'), '').length == 10;
   }
 
   void showInvalidPhoneNumberPopup(BuildContext context) {
@@ -156,22 +161,19 @@ class _LoginState extends State<Login> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (isValidPhoneNumber()) {
-                          // Implement the Logic to send to OTP (dart) and Handle AUTH
                           String phoneNumber = phoneNumberController.text;
                           print('Phone Number : $phoneNumber');
-
+                          IO.Socket socket = SocketManager.getSocket();
+                          socket.emit("get_otp", {'phone': phoneNumber});
                           Navigator.of(context).push(_createPageRoute());
                         } else {
                           showInvalidPhoneNumberPopup(context);
                         }
                       },
                       style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.purple),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
                           ),
@@ -195,6 +197,10 @@ class _LoginState extends State<Login> {
     );
   }
 
+  static String getPhoneNumber() {
+    return phoneNumberController.text;
+  }
+
   PageRouteBuilder _createPageRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => const Otp(),
@@ -203,13 +209,11 @@ class _LoginState extends State<Login> {
         const end = 1.0;
         var curve = Curves.easeInOut;
 
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         var opacityAnimation = animation.drive(tween);
 
-        var scaleTween =
-            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+        var scaleTween = Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
 
         var scaleAnimation = animation.drive(scaleTween);
 
