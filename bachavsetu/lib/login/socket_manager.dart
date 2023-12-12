@@ -19,7 +19,10 @@ class SocketManager {
     _socket = IO.io('http://10.0.2.2:5000/client', OptionBuilder().setTransports(['websocket']).build());
     _socket!.onConnect((data) => print("Connection Estabilished"));
     _socket!.onConnectError((data) => print('Connect error: $data'));
-    _socket!.onDisconnect((data) => print("Socket IO server disconnected"));
+    _socket!.onDisconnect((data) {
+      _socket!.disconnect();
+      print("Socket IO server disconnected");
+    });
   }
 
   static void closeSocket() {

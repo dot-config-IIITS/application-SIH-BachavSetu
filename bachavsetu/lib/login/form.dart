@@ -15,26 +15,11 @@ class _FormPageState extends State<FormPage> {
   TextEditingController relationEmergencyContact = TextEditingController();
   String selectedBloodGroup = 'A+';
   DateTime selectedDOB = DateTime.now();
-  List<String> genderOptions = [
-    'Male',
-    'Female',
-    'Prefer not to say',
-    'Others'
-  ];
-  List<String> bloodGroupOptions = [
-    'A+',
-    'B+',
-    'AB+',
-    'O+',
-    'A-',
-    'B-',
-    'AB-',
-    'O-'
-  ];
+  List<String> genderOptions = ['Male', 'Female', 'Prefer not to say', 'Others'];
+  List<String> bloodGroupOptions = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
 
   bool isValidPhoneNumber() {
-    return emergencyPhoneNumberCon.text.replaceAll(RegExp(r'\D'), '').length ==
-        10;
+    return emergencyPhoneNumberCon.text.replaceAll(RegExp(r'\D'), '').length == 10;
   }
 
   void showInvalidPhoneNumberPopup(BuildContext context) {
@@ -68,17 +53,6 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 15),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: const Icon(
-                      Icons.arrow_back,
-                      size: 32,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ),
                 const SizedBox(
                   height: 18,
                 ),
@@ -172,13 +146,11 @@ class _FormPageState extends State<FormPage> {
                               color: Colors.purple, // Label color
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.purple),
+                              borderSide: const BorderSide(color: Colors.purple),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  const BorderSide(color: Colors.purple),
+                              borderSide: const BorderSide(color: Colors.purple),
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
@@ -202,8 +174,7 @@ class _FormPageState extends State<FormPage> {
                             }
 
                             if (name.text == "") {
-                              print(
-                                  "USER DIDN'T ENTER NAMEEEEEEEEEEEEEEEEEEEE");
+                              print("USER DIDN'T ENTER NAMEEEEEEEEEEEEEEEEEEEE");
                             } else if (relationEmergencyContact.text == "") {
                               print("USER DIDN'T ENTER FAMILY NAME");
                             } else {
@@ -212,12 +183,9 @@ class _FormPageState extends State<FormPage> {
                             }
                           },
                           style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.purple),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
+                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(24.0),
                               ),
@@ -243,10 +211,7 @@ class _FormPageState extends State<FormPage> {
     );
   }
 
-  Widget _buildTextField(
-      {required String label,
-      TextInputType? keyboardType,
-      required TextEditingController con}) {
+  Widget _buildTextField({required String label, TextInputType? keyboardType, required TextEditingController con}) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
