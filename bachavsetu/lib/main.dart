@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'login/socket_manager.dart';
-=======
-
 import 'init_page.dart';
->>>>>>> 67ff59645c91341739ee8a3fffa1bc0e7707a73d
 import 'login/welcome.dart';
 import 'article/articlehomepage.dart';
 
