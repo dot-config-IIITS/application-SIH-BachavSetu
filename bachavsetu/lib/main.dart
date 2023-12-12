@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'init_page.dart';
 import 'login/welcome.dart';
 import 'article/articlehomepage.dart';
 
@@ -13,8 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'BachavSetu',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'GE Inspira'),
-      home: Welcome(),
+      // home: Welcome(),
       // home: ArticleHomePage(),
+      home: InitPage(),
     );
   }
 }
