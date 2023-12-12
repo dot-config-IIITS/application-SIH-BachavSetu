@@ -1,3 +1,4 @@
+import '/article/articlehomepage.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 
@@ -12,6 +13,23 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: const Color(0xfff7f6fb),
+          elevation: 0,
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.skip_next,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ArticleHomePage()),
+                );
+              },
+            ),
+          ]),
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff7f6fb),
       body: SafeArea(
