@@ -15,15 +15,12 @@ Widget customListTile(Article article, BuildContext context) {
     child: Container(
       margin: const EdgeInsets.all(12.0),
       padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 3.0,
-            ),
-          ]),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: const [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 3.0,
+        ),
+      ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,8 +31,7 @@ Widget customListTile(Article article, BuildContext context) {
             decoration: BoxDecoration(
               //let's add the height
 
-              image: DecorationImage(
-                  image: NetworkImage(article.urlToImage), fit: BoxFit.cover),
+              image: DecorationImage(image: NetworkImage(article.urlToImage!), fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(12.0),
             ),
           ),
@@ -49,7 +45,7 @@ Widget customListTile(Article article, BuildContext context) {
               borderRadius: BorderRadius.circular(30.0),
             ),
             child: Text(
-              article.source.name,
+              article.source!.name!,
               style: const TextStyle(
                 color: Colors.white,
               ),
@@ -59,7 +55,7 @@ Widget customListTile(Article article, BuildContext context) {
             height: 8.0,
           ),
           Text(
-            article.title,
+            article.title!,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16.0,

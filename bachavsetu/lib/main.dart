@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'GE Inspira'),
       // home: Welcome(),
-      // home: ArticleHomePage(),
-      home: InitPage(),
+      home: ArticleHomePage(),
+      // home: InitPage(),
     );
   }
 }
