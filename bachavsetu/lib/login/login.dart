@@ -28,7 +28,8 @@ class _LoginState extends State<Login> {
   }
 
   bool isValidPhoneNumber() {
-    return phoneNumberController.text.replaceAll(RegExp(r'\D'), '').length == 10;
+    return phoneNumberController.text.replaceAll(RegExp(r'\D'), '').length ==
+        10;
   }
 
   void showInvalidPhoneNumberPopup(BuildContext context) {
@@ -171,9 +172,12 @@ class _LoginState extends State<Login> {
                         }
                       },
                       style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.purple),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
                           ),
@@ -209,11 +213,13 @@ class _LoginState extends State<Login> {
         const end = 1.0;
         var curve = Curves.easeInOut;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         var opacityAnimation = animation.drive(tween);
 
-        var scaleTween = Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+        var scaleTween =
+            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
 
         var scaleAnimation = animation.drive(scaleTween);
 
