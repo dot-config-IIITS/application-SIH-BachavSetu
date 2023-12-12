@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'socket_manager.dart';
-import 'welcome.dart';
+import 'login/socket_manager.dart';
+import 'login/welcome.dart';
+import 'article/articlehomepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,10 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Flutter OTP Verification',
+    return MaterialApp(
+      title: 'BachavSetu',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'GE Inspira'),
       home: Welcome(),
+      // home: ArticleHomePage(),
     );
   }
 }
