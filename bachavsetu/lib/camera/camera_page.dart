@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class CameraPage extends StatefulWidget {
-  const CameraPage({super.key});
+  const CameraPage({Key? key}) : super(key: key);
 
   @override
   State<CameraPage> createState() => _CameraPageState();
@@ -12,8 +12,27 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   XFile? imageFile;
   XFile? videoFile;
-  String noteText = '';
   final picker = ImagePicker();
+  String noteText = '';
+  TextEditingController noteTextController = TextEditingController();
+  String selectedDisasterOption = 'Option1';
+  List<String> disasterOption = [
+    'Option1',
+    'Option2',
+    'Option3',
+    'Option4',
+    'Option5',
+    'Option6',
+    'Option7',
+    'Option8',
+    'Option9',
+    'Option10',
+    'Option11',
+    'Option12',
+    'Option13',
+    'Option14',
+    'Option15',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +55,21 @@ class _CameraPageState extends State<CameraPage> {
                     onPressed: () {
                       _pickImage();
                     },
-                    child: Icon(Icons.photo),
+                    child: const Icon(Icons.photo),
                   ),
-                  SizedBox(width: 15),
+                  const SizedBox(width: 15),
                   ElevatedButton(
                     onPressed: () {
                       _captureImage();
                     },
-                    child: Icon(Icons.camera),
+                    child: const Icon(Icons.camera),
                   ),
                 ],
               ),
               const SizedBox(height: 15),
               Container(
-                width: 200,
-                height: 200,
+                width: 150,
+                height: 100,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
@@ -72,21 +91,21 @@ class _CameraPageState extends State<CameraPage> {
                     onPressed: () {
                       _pickVideo();
                     },
-                    child: Icon(Icons.video_library),
+                    child: const Icon(Icons.video_library),
                   ),
-                  SizedBox(width: 15),
+                  const SizedBox(width: 15),
                   ElevatedButton(
                     onPressed: () {
                       _recordVideo();
                     },
-                    child: Icon(Icons.videocam),
+                    child: const Icon(Icons.videocam),
                   ),
                 ],
               ),
               const SizedBox(height: 15),
               Container(
-                width: 200,
-                height: 50,
+                width: 150,
+                height: 100,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
@@ -102,6 +121,36 @@ class _CameraPageState extends State<CameraPage> {
                 ),
               ),
               const SizedBox(height: 20),
+              // Dropdown menu for selecting the type of disaster/calamity
+              Container(
+                width: 300,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Select Disaster Type',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DropdownButton<String>(
+                      value: selectedDisasterOption,
+                      onChanged: _onDropdownChanged,
+                      items: disasterOption.map((option) {
+                        return DropdownMenuItem<String>(
+                          value: option,
+                          child: Text(option),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              // Text input for adding notes
               Container(
                 width: 300,
                 padding: const EdgeInsets.all(10),
@@ -110,6 +159,7 @@ class _CameraPageState extends State<CameraPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: noteTextController,
                   decoration: const InputDecoration(
                     hintText: 'Write your note here...',
                     border: InputBorder.none,
@@ -173,8 +223,17 @@ class _CameraPageState extends State<CameraPage> {
     });
   }
 
+  void _onDropdownChanged(String? newValue) {
+    if (newValue != null) {
+      setState(() {
+        selectedDisasterOption = newValue;
+      });
+    }
+  }
+
   void _submit() {
-    print('Note: $noteText');
+    print('Note: ${noteTextController.text}');
+    print('Selected Disaster Type: $selectedDisasterOption');
     if (imageFile != null) {
       print('Image Path: ${imageFile!.path}');
     }
@@ -185,7 +244,8 @@ class _CameraPageState extends State<CameraPage> {
     setState(() {
       imageFile = null;
       videoFile = null;
-      noteText = '';
+      noteTextController.clear();
+      selectedDisasterOption = 'Option1';
     });
   }
 }
