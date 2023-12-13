@@ -1,5 +1,6 @@
 import '/article/articlehomepage.dart';
-import '../init_page.dart';
+import '/init_page.dart';
+import '/settings/mock_drill.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 
@@ -17,6 +18,7 @@ class _WelcomeState extends State<Welcome> {
       appBar: AppBar(
         backgroundColor: const Color(0xfff7f6fb),
         elevation: 0,
+        // <========================Back Doors (To be Removed)======================>
         actions: [
           IconButton(
             icon: const Icon(
@@ -42,7 +44,20 @@ class _WelcomeState extends State<Welcome> {
               );
             },
           ),
+          IconButton(
+            icon: const Icon(
+              Icons.skip_next,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MockDrill()),
+              );
+            },
+          ),
         ],
+        // <========================Back Doors (To be Removed)======================>
       ),
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff7f6fb),
