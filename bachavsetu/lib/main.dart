@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       // home: Welcome(),
       // home: ArticleHomePage(),
       home: InitPage(),
+      // home: MockDrill(),
     );
   }
 }
