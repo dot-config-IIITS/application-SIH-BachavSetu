@@ -28,6 +28,7 @@ class _CameraPageState extends State<CameraPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -93,7 +94,11 @@ class _CameraPageState extends State<CameraPage> {
                 child: Center(
                   child: videoFile == null
                       ? const Text('No video selected')
-                      : Text('Video path: ${videoFile!.path}'),
+                      : Image.file(
+                          File(videoFile!.path),
+                          height: 150,
+                          width: 150,
+                        ),
                 ),
               ),
               const SizedBox(height: 20),
