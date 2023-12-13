@@ -49,7 +49,7 @@ class _CameraPageState extends State<CameraPage> {
             children: [
               const SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                     onPressed: () {
@@ -57,43 +57,18 @@ class _CameraPageState extends State<CameraPage> {
                     },
                     child: const Icon(Icons.photo),
                   ),
-                  const SizedBox(width: 15),
                   ElevatedButton(
                     onPressed: () {
                       _captureImage();
                     },
                     child: const Icon(Icons.camera),
                   ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Container(
-                width: 150,
-                height: 100,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: imageFile == null
-                      ? const Text('No image selected')
-                      : Image.file(
-                          File(imageFile!.path),
-                          height: 150,
-                        ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
                   ElevatedButton(
                     onPressed: () {
                       _pickVideo();
                     },
                     child: const Icon(Icons.video_library),
                   ),
-                  const SizedBox(width: 15),
                   ElevatedButton(
                     onPressed: () {
                       _recordVideo();
@@ -103,22 +78,44 @@ class _CameraPageState extends State<CameraPage> {
                 ],
               ),
               const SizedBox(height: 15),
-              Container(
-                width: 150,
-                height: 100,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: videoFile == null
-                      ? const Text('No video selected')
-                      : Image.file(
-                          File(videoFile!.path),
-                          height: 150,
-                          width: 150,
-                        ),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: imageFile == null
+                          ? const Text('No image selected')
+                          : Image.file(
+                              File(imageFile!.path),
+                              height: 150,
+                              width: 150,
+                            ),
+                    ),
+                  ),
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: videoFile == null
+                          ? const Text('No video selected')
+                          : Image.file(
+                              File(videoFile!.path),
+                              height: 150,
+                              width: 150,
+                            ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               // Dropdown menu for selecting the type of disaster/calamity
