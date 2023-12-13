@@ -3,6 +3,7 @@ import 'login/socket_manager.dart';
 import 'init_page.dart';
 import 'login/welcome.dart';
 import 'article/articlehomepage.dart';
+import 'settings/mock_drill.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,0 +1,141 @@
+import 'package:flutter/material.dart';
+
+class RoadAccident extends StatelessWidget {
+  const RoadAccident({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Road Accidents'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Initial Safety Measures',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: Image.network(
+                  'https://placekitten.com/200/150', // Replace with actual image URL
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Move to a Safe Location',
+              ),
+              const Text(
+                '1. If possible, move vehicles to the side of the road to avoid further accidents.',
+              ),
+              const Text(
+                '2. Turn on hazard lights to alert other drivers.',
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Check for Injuries',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: Image.network(
+                    'https://placekitten.com/200/150'), // Replace with actual image URL
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                '1. Assess yourself and others for injuries.',
+              ),
+              const Text(
+                '2. Call emergency services if there are injuries.',
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Communication',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: Image.network(
+                    'https://placekitten.com/200/150'), // Replace with actual image URL
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Exchange Information',
+              ),
+              const Text(
+                '1. Exchange names, addresses, phone numbers, insurance information, and vehicle details with other parties involved.',
+              ),
+              const Text(
+                '2. Obtain contact information for witnesses.',
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Document the Scene',
+              ),
+              const Text(
+                '1. Take pictures of the accident scene, including vehicle positions and damage.',
+              ),
+              const Text(
+                '2. Note road conditions and any relevant details.',
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Medical Assistance',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: Image.network(
+                    'https://placekitten.com/200/150'), // Replace with actual image URL
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                '1. Seek Medical Attention',
+              ),
+              const Text(
+                '2. Even if injuries seem minor, seek medical attention promptly.',
+              ),
+              const Text(
+                '3. Call emergency services for immediate assistance.',
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Legal and Insurance',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: Image.network(
+                    'https://placekitten.com/200/150'), // Replace with actual image URL
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                '1. File a Police Report',
+              ),
+              const Text(
+                '2. File a report with law enforcement.',
+              ),
+              const Text(
+                '3. Obtain a copy of the report for insurance purposes.',
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Contact Insurance',
+              ),
+              const Text(
+                '1. Notify your insurance company as soon as possible.',
+              ),
+              const Text(
+                '2. Provide accurate and detailed information.',
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
