@@ -43,6 +43,8 @@ dependencies:
   socket_io_client: ^2.0.3+1
   http: ^1.1.2
   
+  latlong2: ^0.9.0
+  flutter_map:
 
 dev_dependencies:
   flutter_test:
