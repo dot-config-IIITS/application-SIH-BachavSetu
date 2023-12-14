@@ -43,3 +43,5 @@ app.*.map.json
 /android/app/release
 
 bachavsetu/lib/article/api_key.dart
+
+bachavsetu/lib/settings/mockdrill/a.py

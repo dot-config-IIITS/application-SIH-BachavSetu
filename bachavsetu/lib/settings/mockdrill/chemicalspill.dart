@@ -5,9 +5,42 @@ class ChemicalSpill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.warning),
+                SizedBox(width: 8),
+                Text('Alert'),
+                SizedBox(width: 8),
+                Icon(Icons.warning),
+              ],
+            ),
+            content: const Text(
+              'Chemical Spill Alert In Your Area!',
+              textAlign: TextAlign.center,
+            ),
+            actions: [
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Ensure Your Safety'),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    });
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chemical Spill/Industrial Accident'),
+        title: const Text('Chemical Spill'),
       ),
       body: SingleChildScrollView(
         child: Padding(

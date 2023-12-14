@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
       title: 'BachavSetu',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'GE Inspira'),
-      home: Welcome(),
+      // home: Welcome(),
       // home: ArticleHomePage(),
       // home: InitPage(),
-      // home: MockDrill(),
+      home: MockDrill(),
     );
   }
 }
