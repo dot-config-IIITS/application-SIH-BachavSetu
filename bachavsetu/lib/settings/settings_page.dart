@@ -20,13 +20,13 @@ class _AccountScreenState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Ionicons.chevron_back_outline),
-        ),
-        leadingWidth: 80,
-      ),
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     onPressed: () {},
+      //     icon: const Icon(Ionicons.chevron_back_outline),
+      //   ),
+      //   leadingWidth: 80,
+      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(30),
@@ -165,6 +165,7 @@ class _AccountScreenState extends State<SettingsPage> {
                 iconColor: Colors.red,
                 onTap: () {},
               ),
+              const SizedBox(height: 70),
             ],
           ),
         ),

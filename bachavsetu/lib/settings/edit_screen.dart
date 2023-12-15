@@ -16,6 +16,27 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   String gender = "Male";
   List<String> genderOptions = ['Male', 'Female', 'Prefer not to say', 'Others'];
   String selectedBloodGroup = 'A+';
+  List<String> bloodGroupOptions = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
+  String selectedRelationship = 'Father';
+  List<String> relationshipOptions = [
+    'Father',
+    'Mother',
+    'Spouse',
+    'Brother',
+    'Sister',
+    'Son',
+    'Daughter',
+    'Grandfather',
+    'Grandmother',
+    'Uncle',
+    'Aunt',
+    'Cousin',
+    'Friend',
+    'Neighbor',
+    'Colleague',
+    'Other',
+    // MORE RELATIONS CAN BE ADDED
+  ];
   DateTime selectedDOB = DateTime.now();
 
   Future<void> _selectDate(
@@ -39,6 +60,43 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
     }
   }
 
+  Widget _buildDropdownRow({
+    required String label,
+    required String value,
+    required ValueChanged<String?> onChanged,
+    required List<String> items,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: DropdownButtonFormField<String>(
+        value: value,
+        onChanged: onChanged,
+        items: items.map((String item) {
+          return DropdownMenuItem<String>(
+            value: item,
+            child: Text(item),
+          );
+        }).toList(),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black54),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black54),
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildDatePickerRow({
     required DateTime selectedDate,
     required ValueChanged<DateTime> onDateChanged,
@@ -52,7 +110,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "${selectedDate.toLocal()}".split(' ')[0],
+            "${"${selectedDate.toLocal()}".split(' ')[0].split('-')[2]}-${"${selectedDate.toLocal()}".split(' ')[0].split('-')[1]}-${"${selectedDate.toLocal()}".split(' ')[0].split('-')[0]}",
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -158,6 +216,24 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
               ),
               const SizedBox(height: 40),
               EditItem(
+                title: "Blood Type",
+                widget: DropdownButton<String>(
+                  value: selectedBloodGroup,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedBloodGroup = value!;
+                    });
+                  },
+                  items: bloodGroupOptions.map((String item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(item),
+                    );
+                  }).toList(),
+                ),
+              ),
+              const SizedBox(height: 40),
+              EditItem(
                 widget: _buildDatePickerRow(
                     selectedDate: selectedDOB,
                     onDateChanged: (date) {
@@ -208,29 +284,15 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
               ),
               const SizedBox(height: 20),
               EditItem2(
-                widget: TextFormField(
-                  // controller: con,
-                  keyboardType: TextInputType.text,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  decoration: InputDecoration(
-                    labelText: "Relationship w/ Emergency Contact",
-                    labelStyle: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54, // Label color
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black54),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.black54),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
+                widget: _buildDropdownRow(
+                  label: 'Relationship with Emergency Contact',
+                  value: selectedRelationship,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedRelationship = value!;
+                    });
+                  },
+                  items: relationshipOptions,
                 ),
               ),
             ],
