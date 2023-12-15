@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'GE Inspira'),
       // home: Welcome(),
       // home: ArticleHomePage(),
-      // home: InitPage(),
+      home: InitPage(),
       // home: MockDrill(),
-      home: SettingsPage(),
+      // home: SettingsPage(),
     );
   }
 }

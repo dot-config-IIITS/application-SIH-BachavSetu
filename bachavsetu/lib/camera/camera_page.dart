@@ -53,7 +53,8 @@ class _CameraPageState extends State<CameraPage> {
   }
 
   Future<void> _loadStatesAndDistricts() async {
-    final String data = await rootBundle.loadString('assets/settingsAssets/states_districts.json');
+    final String data = await rootBundle
+        .loadString('assets/settingsAssets/states_districts.json');
     final Map<String, dynamic> statesData = json.decode(data);
 
     statesData.forEach((key, value) {
@@ -63,7 +64,9 @@ class _CameraPageState extends State<CameraPage> {
 
     setState(() {
       selectedStateName = stateNames.isNotEmpty ? stateNames[0] : '';
-      selectedDistrict = districts[selectedStateName]!.isNotEmpty ? districts[selectedStateName]![0] : '';
+      selectedDistrict = districts[selectedStateName]!.isNotEmpty
+          ? districts[selectedStateName]![0]
+          : '';
     });
   }
 
@@ -153,7 +156,8 @@ class _CameraPageState extends State<CameraPage> {
               const SizedBox(height: 20),
               // Dropdown menu for selecting the type of disaster/calamity
               Container(
-                width: 300,
+                width: 350,
+                height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
@@ -184,7 +188,8 @@ class _CameraPageState extends State<CameraPage> {
               ),
               const SizedBox(height: 20),
               Container(
-                width: 300,
+                width: 350,
+                height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
@@ -208,7 +213,9 @@ class _CameraPageState extends State<CameraPage> {
                         onChanged: (value) {
                           setState(() {
                             selectedStateName = value!;
-                            selectedDistrict = districts[value]!.isNotEmpty ? districts[value]![0] : '';
+                            selectedDistrict = districts[value]!.isNotEmpty
+                                ? districts[value]![0]
+                                : '';
                           });
                         },
                         items: stateNames.map((option) {
@@ -227,7 +234,8 @@ class _CameraPageState extends State<CameraPage> {
               ),
               const SizedBox(height: 20),
               Container(
-                width: 300,
+                width: 350,
+                height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
@@ -268,7 +276,8 @@ class _CameraPageState extends State<CameraPage> {
               const SizedBox(height: 20),
               // Text input for adding notes
               Container(
-                width: 300,
+                width: 350,
+                height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
