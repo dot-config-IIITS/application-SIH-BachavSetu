@@ -1,10 +1,11 @@
-import 'dart:ffi';
-
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'location.dart';
+// import 'location.dart';
 import 'point.dart';
-
 import 'package:flutter_map/flutter_map.dart';
+import 'package:path/path.dart' as p;
 import 'package:latlong2/latlong.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,51 +16,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Point point1 = Point(
-    name: locations[0]['name'],
-    coordinates: LatLng(
-      locations[0]['coordinates']['latitude'],
-      locations[0]['coordinates']['longitude'],
-    ),
-    type: locations[0]['type'],
-    intensity: locations[0]['intensity'],
-    radius: locations[0]['radius'],
-  );
-
-  Point point2 = Point(
-    name: locations[1]['name'],
-    coordinates: LatLng(
-      locations[1]['coordinates']['latitude'],
-      locations[1]['coordinates']['longitude'],
-    ),
-    type: locations[1]['type'],
-    intensity: locations[1]['intensity'],
-    radius: locations[1]['radius'],
-  );
-
-  Point point3 = Point(
-    name: locations[2]['name'],
-    coordinates: LatLng(
-      locations[2]['coordinates']['latitude'],
-      locations[2]['coordinates']['longitude'],
-    ),
-    type: locations[2]['type'],
-    intensity: locations[2]['intensity'],
-    radius: locations[2]['radius'],
-  );
-
-  Point point4 = Point(
-    name: locations[3]['name'],
-    coordinates: LatLng(
-      locations[3]['coordinates']['latitude'],
-      locations[3]['coordinates']['longitude'],
-    ),
-    type: locations[3]['type'],
-    intensity: locations[3]['intensity'],
-    radius: locations[3]['radius'],
-  );
+  List<Point> points = [];
+  Timer? updateTimer;
 
   @override
+  void initState() {
+    super.initState();
+    startUpdateTimer();
+    readLocationsFile();
+    // updatePoints(locations);
+  }
+
+  @override
+  void dispose() {
+    updateTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> readLocationsFile() async {
+    try {
+      final String currentDir = Directory.current.path;
+      final String filePath = p.join(currentDir, 'location.dart');
+
+      final File file = File(filePath);
+      final String contents = await file.readAsString();
+      final List<Map<dynamic, dynamic>> updatedLocations =
+          json.decode(contents);
+
+      print(updatedLocations);
+
+      updatePoints(updatedLocations);
+    } catch (e) {
+      print('Error reading locations file: $e');
+    }
+  }
+
   Color generateHeatmapColor(double intensity) {
     intensity = intensity.clamp(0.0, 1.0);
 
@@ -73,6 +64,95 @@ class _HomePageState extends State<HomePage> {
     return intensity > 0.5 ? intensity * 0.5 : intensity;
   }
 
+  bool isGood(String type) {
+    return type == 'relief' ||
+        type == 'hospital' ||
+        type == 'police' ||
+        type == 'firedept';
+  }
+
+  Icon generateIcon(String type) {
+    switch (type) {
+      case 'relief':
+        return const Icon(
+          Icons.house,
+          color: Colors.black,
+        );
+      case 'hospital':
+        return const Icon(
+          Icons.local_hospital,
+          color: Colors.black,
+        );
+      case 'police':
+        return const Icon(
+          Icons.local_police,
+          color: Colors.black,
+        );
+      case 'firedept':
+        return const Icon(
+          Icons.fire_truck,
+          color: Colors.black,
+        );
+      case 'accident':
+        return const Icon(
+          Icons.car_crash_sharp,
+          color: Colors.red,
+        );
+      case 'fire':
+        return const Icon(
+          Icons.fireplace,
+          color: Colors.red,
+        );
+      default:
+        return const Icon(
+          Icons.warning,
+          color: Colors.black,
+        );
+    }
+  }
+
+  void addPoint(Map<dynamic, dynamic> location, List<Point> listToUpdate) {
+    Point newPoint = Point(
+      name: location['name'],
+      coordinates: LatLng(
+        location['coordinates']['latitude'],
+        location['coordinates']['longitude'],
+      ),
+      type: location['type'],
+      intensity: location['intensity'],
+      radius: location['radius'],
+    );
+
+    setState(() {
+      listToUpdate.add(newPoint);
+    });
+  }
+
+  void removePoint(Point point) {
+    setState(() {
+      points.remove(point);
+    });
+  }
+
+  void startUpdateTimer() {
+    updateTimer = Timer.periodic(const Duration(seconds: 20), (timer) {
+      // updatePoints(locations);
+    });
+  }
+
+  void updatePoints(List<Map<dynamic, dynamic>> updatedLocations) {
+    List<Point> newPoints = [];
+
+    for (var location in updatedLocations) {
+      addPoint(location, newPoints);
+    }
+
+    setState(() {
+      points = newPoints;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -80,100 +160,53 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.deepPurple.shade50,
       ),
       backgroundColor: Colors.deepPurple.shade100,
-      body: FlutterMap(
-        options: MapOptions(
-          initialCenter: point1.coordinates!,
-          initialZoom: 14,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate:
-                'https://api.mapbox.com/styles/v1/sahoobishwajeet/clq5bo7nn01zy01pacmmee3fn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
-            // userAgentPackageName: 'com.example.app',
-            additionalOptions: const {
-              'accessToken':
-                  'pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
-              'id': 'mapbox.mapbox-streets-v8'
-            },
-          ),
-          MarkerLayer(
-            markers: [
-              Marker(
-                width: 30.0,
-                height: 30.0,
-                point: point1.coordinates!,
-                child: Icon(
-                  Icons.location_on,
-                  color: point1.type == 'relief' ? Colors.green : Colors.red,
-                ),
-                rotate: true,
-              ),
-              Marker(
-                width: 30.0,
-                height: 30.0,
-                point: point2.coordinates!,
-                child: Icon(
-                  Icons.location_on,
-                  color: point2.type == 'relief' ? Colors.green : Colors.red,
-                ),
-                rotate: true,
-              ),
-              Marker(
-                width: 30.0,
-                height: 30.0,
-                point: point3.coordinates!,
-                child: Icon(
-                  Icons.location_on,
-                  color: point3.type == 'relief' ? Colors.green : Colors.red,
-                ),
-                rotate: true,
-              ),
-              Marker(
-                width: 30.0,
-                height: 30.0,
-                point: point4.coordinates!,
-                child: Icon(
-                  Icons.location_on,
-                  color: point4.type == 'relief' ? Colors.green : Colors.red,
-                ),
-                rotate: true,
-              ),
-            ],
-          ),
-          CircleLayer(
-            circles: [
-              CircleMarker(
-                point: point1.coordinates!,
-                radius: point1.radius!,
-                useRadiusInMeter: true,
-                color: generateHeatmapColor(point1.intensity!)
-                    .withOpacity(generateOpacity(point1.intensity!)),
-              ),
-              CircleMarker(
-                point: point2.coordinates!,
-                radius: point2.radius!,
-                useRadiusInMeter: true,
-                color: generateHeatmapColor(point2.intensity!)
-                    .withOpacity(generateOpacity(point2.intensity!)),
-              ),
-              CircleMarker(
-                point: point3.coordinates!,
-                radius: point3.radius!,
-                useRadiusInMeter: true,
-                color: generateHeatmapColor(point3.intensity!)
-                    .withOpacity(generateOpacity(point3.intensity!)),
-              ),
-              CircleMarker(
-                point: point4.coordinates!,
-                radius: point4.radius!,
-                useRadiusInMeter: true,
-                color: generateHeatmapColor(point4.intensity!)
-                    .withOpacity(generateOpacity(point4.intensity!)),
-              ),
-            ],
-          ),
-        ],
-      ),
+      body: const Text('Testing'),
+      //   body: FlutterMap(
+      //     options: MapOptions(
+      //       initialCenter:
+      //           points.isNotEmpty ? points[0].coordinates! : const LatLng(0, 0),
+      //       initialZoom: 14,
+      //     ),
+      //     children: [
+      //       TileLayer(
+      //         urlTemplate:
+      //             'https://api.mapbox.com/styles/v1/sahoobishwajeet/clq5bo7nn01zy01pacmmee3fn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
+      //         additionalOptions: const {
+      //           'accessToken':
+      //               'pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
+      //           'id': 'mapbox.mapbox-streets-v8'
+      //         },
+      //       ),
+      //       MarkerLayer(
+      //         markers: points
+      //             .map(
+      //               (point) => Marker(
+      //                 width: 30.0,
+      //                 height: 30.0,
+      //                 point: point.coordinates!,
+      //                 child: generateIcon(point.type!),
+      //                 rotate: true,
+      //               ),
+      //             )
+      //             .toList(),
+      //       ),
+      //       CircleLayer(
+      //         circles: points
+      //             .map(
+      //               (point) => CircleMarker(
+      //                 point: point.coordinates!,
+      //                 radius: point.radius!,
+      //                 useRadiusInMeter: true,
+      //                 color: isGood(point.type!)
+      //                     ? Colors.green.withOpacity(point.intensity!)
+      //                     : generateHeatmapColor(point.intensity!)
+      //                         .withOpacity(generateOpacity(point.intensity!)),
+      //               ),
+      //             )
+      //             .toList(),
+      //       ),
+      //     ],
+      //   ),
     );
   }
 }

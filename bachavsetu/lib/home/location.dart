@@ -1,42 +1,72 @@
 List<Map> locations = [
   {
-    'name': 'IIIT Sri City',
+    'name': 'PVPSIT',
     'coordinates': {
-      'latitude': 13.555637554644944,
-      'longitude': 80.02668878673758,
+      'latitude': 16.48784010549246,
+      'longitude': 80.69439348089172,
     },
     'type': 'relief',
-    'intensity': 0.0,
-    'radius': 1.0,
+    'intensity': 0.2,
+    'radius': 250.0,
   },
   {
-    'name': 'Kobelco Sri City',
+    'name': 'Kanuru',
     'coordinates': {
-      'latitude': 13.555063740419495,
-      'longitude': 80.01420163512404,
+      'latitude': 16.500015724527493,
+      'longitude': 80.69160408652115,
     },
     'type': 'accident',
     'intensity': 0.2,
     'radius': 200.0,
   },
   {
-    'name': 'Zero Point',
+    'name': 'Sitapuram Colony',
     'coordinates': {
-      'latitude': 13.577083681415077,
-      'longitude': 80.04380057925486,
+      'latitude': 16.475786057744276,
+      'longitude': 80.7094013279649,
     },
     'type': 'flood',
     'intensity': 0.8,
     'radius': 400.0,
   },
   {
-    'name': 'Tada',
+    'name': 'SRN Police',
     'coordinates': {
-      'latitude': 13.590338881595303,
-      'longitude': 80.03276138892804,
+      'latitude': 16.511850797545755,
+      'longitude': 80.69144235326961,
     },
-    'type': 'accident',
+    'type': 'police',
+    'intensity': 0.3,
+    'radius': 250.0,
+  },
+  {
+    'name': 'Kamineni Hospital',
+    'coordinates': {
+      'latitude': 16.497043743566362,
+      'longitude': 80.70273631514088,
+    },
+    'type': 'hospital',
+    'intensity': 0.3,
+    'radius': 250.0,
+  },
+  {
+    'name': 'SRN Fire Station',
+    'coordinates': {
+      'latitude': 16.50742086453858,
+      'longitude': 80.70579151012141,
+    },
+    'type': 'firedept',
+    'intensity': 0.3,
+    'radius': 250.0,
+  },
+  {
+    'name': 'Ashok Nagar',
+    'coordinates': {
+      'latitude': 16.485043597365173,
+      'longitude': 80.68283138971192,
+    },
+    'type': 'fire',
     'intensity': 0.3,
     'radius': 200.0,
-  },
+  }
 ];

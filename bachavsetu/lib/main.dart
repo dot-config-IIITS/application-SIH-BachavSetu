@@ -1,4 +1,3 @@
-import 'package:bachavsetu/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'login/socket_manager.dart';
 import 'init_page.dart';
@@ -24,6 +23,7 @@ class MyApp extends StatelessWidget {
       // home: ArticleHomePage(),
       home: InitPage(),
       // home: MockDrill(),
+      // home: FormPage(),
     );
   }
 }
