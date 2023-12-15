@@ -26,7 +26,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const Text(
-                'By accessing or using [Your Application Name] (the "App"), you agree to comply with and be bound by these Terms & Conditions (the "Terms"). If you do not agree to these Terms, please do not use the App.',
+                'By accessing or using BachavSetu (the "App"), you agree to comply with and be bound by these Terms & Conditions (the "Terms"). If you do not agree to these Terms, please do not use the App.',
               ),
               const SizedBox(height: 16.0),
               const Text(
@@ -34,7 +34,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const Text(
-                '(a) Eligibility: You must be at least [age] years old to use the App. By using the App, you represent and warrant that you are of legal age to form a binding contract.',
+                '(a) Eligibility: You must be at least 12 years old to use the App. By using the App, you represent and warrant that you are of legal age to form a binding contract.',
               ),
               const Text(
                 '(b) Account: To use certain features of the App, you may be required to create an account. You are responsible for maintaining the confidentiality of your account information and are fully responsible for all activities that occur under your account.',
@@ -45,7 +45,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const Text(
-                '(a) User Content: You may be able to submit content to the App, including but not limited to text, images, and other materials. You are solely responsible for the content you submit, and you grant [Your Company] a non-exclusive, worldwide, royalty-free, sublicensable, and transferable license to use, reproduce, distribute, prepare derivative works of, display, and perform your content.',
+                '(a) User Content: You may be able to submit content to the App, including but not limited to text, images, and other materials. You are solely responsible for the content you submit, and you grant dot-config a non-exclusive, worldwide, royalty-free, sublicensable, and transferable license to use, reproduce, distribute, prepare derivative works of, display, and perform your content.',
               ),
               const Text(
                 '(b) Prohibited Content: You agree not to submit content that is illegal, obscene, threatening, defamatory, invasive of privacy, infringing on intellectual property rights, or otherwise objectionable.',
@@ -56,7 +56,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const Text(
-                'The App and its original content, features, and functionality are owned by [Your Company] and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.',
+                'The App and its original content, features, and functionality are owned by dot-config and are protected by international copyright, trademark, patent, trade secret, and other intellectual property or proprietary rights laws.',
               ),
               const SizedBox(height: 16.0),
               const Text(
@@ -88,7 +88,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const Text(
-                'These Terms are governed by and construed in accordance with the laws of [Your Jurisdiction], and you irrevocably submit to the exclusive jurisdiction of the courts in that state or location.',
+                'These Terms are governed by and construed in accordance with the laws of Information Technology Act, 2000 (India), and you irrevocably submit to the exclusive jurisdiction of the courts in that state or location.',
               ),
               const SizedBox(height: 16.0),
               const Text(
@@ -109,7 +109,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => ContactUsPage()));
                 },
                 child: const Text(
-                  'Your Contact Information',
+                  'Our Contact Information',
                   style: TextStyle(
                     color: Colors.blue,
                     decoration: TextDecoration.underline,

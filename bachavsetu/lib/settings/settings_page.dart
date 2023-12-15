@@ -7,6 +7,7 @@ import 'package:ionicons/ionicons.dart';
 import 'article/articlehomepage.dart';
 import 'edit_item.dart';
 import 'forward_button.dart';
+import 'other/privacy_policy.dart';
 import 'other/terms_and_conditions.dart';
 import 'setting_item.dart';
 import 'setting_switch.dart';
@@ -171,7 +172,14 @@ class _AccountScreenState extends State<SettingsPage> {
                 icon: Ionicons.lock_closed,
                 bgColor: Colors.blue.shade100,
                 iconColor: Colors.blue,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PrivacyPolicyPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(
