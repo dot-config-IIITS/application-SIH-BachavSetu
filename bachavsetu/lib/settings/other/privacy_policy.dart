@@ -78,7 +78,7 @@ class PrivacyPolicyPage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => ContactUsPage()));
                 },
                 child: const Text(
-                  'If you have any questions about our Privacy Policy, please contact us at Contact Information.',
+                  'If you have any questions about our Privacy Policy, please contact us here.',
                   style: TextStyle(
                     color: Colors.blue,
                     decoration: TextDecoration.underline,

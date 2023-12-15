@@ -17,7 +17,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Last Updated: [Date]',
+                'Last Updated: 15-12-2023',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16.0),
@@ -26,7 +26,7 @@ class TermsAndConditionsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const Text(
-                'By accessing or using BachavSetu (the "App"), you agree to comply with and be bound by these Terms & Conditions (the "Terms"). If you do not agree to these Terms, please do not use the App.',
+                'By accessing or using BachavSetu (the "App"), you agree to comply with and be bound by these Terms & Conditions. If you do not agree to these Terms, please do not use the App.',
               ),
               const SizedBox(height: 16.0),
               const Text(
@@ -123,9 +123,9 @@ class TermsAndConditionsPage extends StatelessWidget {
     );
   }
 
-  Future<void> _launchUrl(Uri _url) async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
     }
   }
 }
