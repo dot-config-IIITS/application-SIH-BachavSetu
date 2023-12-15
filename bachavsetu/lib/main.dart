@@ -5,8 +5,7 @@ import 'login/socket_manager.dart';
 import 'init_page.dart';
 import 'settings/settings_page.dart';
 import 'login/form.dart';
-import 'article/articlehomepage.dart';
-import 'settings/mock_drill.dart';
+import 'settings/article/articlehomepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,14 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'BachavSetu',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'GE Inspira'),
-        // home: Welcome(),
-        // home: ArticleHomePage(),
-        // home: InitPage(),
-        // home: MockDrill(),
-        // home: SettingsPage(),
-        home: CameraPage());
+      title: 'BachavSetu',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'GE Inspira'),
+      // home: Welcome(),
+      // home: ArticleHomePage(),
+      // home: InitPage(),
+      // home: MockDrill(),
+      home: SettingsPage(),
+    );
   }
 }

@@ -1,7 +1,13 @@
+import 'package:bachavsetu/settings/article/articles_details_page.dart';
+import 'package:bachavsetu/settings/contactus/contact_us.dart';
+import 'package:bachavsetu/settings/feedback/feedback.dart';
+import 'package:bachavsetu/settings/mockdrill/mock_drill.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'article/articlehomepage.dart';
 import 'edit_item.dart';
 import 'forward_button.dart';
+import 'other/terms_and_conditions.dart';
 import 'setting_item.dart';
 import 'setting_switch.dart';
 import 'edit_screen.dart';
@@ -20,27 +26,16 @@ class _AccountScreenState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //     onPressed: () {},
-      //     icon: const Icon(Ionicons.chevron_back_outline),
-      //   ),
-      //   leadingWidth: 80,
-      // ),
+      appBar: AppBar(
+        title: const Text('Settings'),
+        backgroundColor: Colors.deepPurple.shade50,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Settings",
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 40),
               const Text(
                 "User Profile",
                 style: TextStyle(
@@ -53,7 +48,8 @@ class _AccountScreenState extends State<SettingsPage> {
                 width: double.infinity,
                 child: Row(
                   children: [
-                    Image.asset("assets/settingsAssets/avatar.png", width: 70, height: 70),
+                    Image.asset("assets/settingsAssets/avatar.png",
+                        width: 70, height: 70),
                     const SizedBox(width: 20),
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +93,14 @@ class _AccountScreenState extends State<SettingsPage> {
                 bgColor: Colors.deepPurple.shade100,
                 iconColor: Colors.deepPurple,
                 value: "English",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MockDrill(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(
@@ -106,11 +109,18 @@ class _AccountScreenState extends State<SettingsPage> {
                 bgColor: Colors.orange.shade100,
                 iconColor: Colors.orange,
                 value: "English",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ArticleHomePage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 40),
               const Text(
-                "Settings",
+                "Other Settings",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
@@ -123,7 +133,29 @@ class _AccountScreenState extends State<SettingsPage> {
                 bgColor: Colors.orange.shade100,
                 iconColor: Colors.orange,
                 value: "English",
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ContactUsPage(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              SettingItem(
+                title: "Send Feedback",
+                icon: Ionicons.chatbubble,
+                bgColor: Colors.blue.shade100,
+                iconColor: Colors.blue,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FeedbackForm(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(
@@ -147,15 +179,14 @@ class _AccountScreenState extends State<SettingsPage> {
                 icon: Ionicons.document,
                 bgColor: Colors.blue.shade100,
                 iconColor: Colors.blue,
-                onTap: () {},
-              ),
-              const SizedBox(height: 20),
-              SettingItem(
-                title: "Send Feedback",
-                icon: Ionicons.chatbubble,
-                bgColor: Colors.blue.shade100,
-                iconColor: Colors.blue,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TermsAndConditionsPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(

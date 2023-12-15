@@ -1,6 +1,5 @@
-import '/article/articlehomepage.dart';
+import '../settings/article/articlehomepage.dart';
 import '/init_page.dart';
-import '/settings/mock_drill.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 
@@ -28,31 +27,7 @@ class _WelcomeState extends State<Welcome> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ArticleHomePage()),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.skip_next,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
                 MaterialPageRoute(builder: (context) => InitPage()),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.skip_next,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MockDrill()),
               );
             },
           ),
