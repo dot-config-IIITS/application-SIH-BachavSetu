@@ -64,8 +64,8 @@ class TermsAndConditionsPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               GestureDetector(
-                onTap: () => _launchURL(
-                    'https://github.com/dot-config-IIITS/application-SIH-BachavSetu'),
+                onTap: () => _launchUrl(
+                    Uri.parse('https://github.com/dot-config-IIITS/')),
                 child: const Text(
                   'Your use of the App is also governed by our Privacy Policy, which can be found at Link to Privacy Policy',
                   style: TextStyle(
@@ -123,11 +123,9 @@ class TermsAndConditionsPage extends StatelessWidget {
     );
   }
 
-  void _launchURL(String url) async {
-    if (await canLaunchUrl(url as Uri)) {
-      await launchUrl(url as Uri);
-    } else {
-      throw 'Could not launch $url';
+  Future<void> _launchUrl(Uri _url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 }
