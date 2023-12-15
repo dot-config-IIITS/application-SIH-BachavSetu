@@ -5,6 +5,7 @@ import 'init_page.dart';
 import 'settings/settings_page.dart';
 import 'login/form.dart';
 import 'article/articlehomepage.dart';
+import 'settings/mock_drill.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'GE Inspira'),
       // home: Welcome(),
       // home: ArticleHomePage(),
-      // home: InitPage(),
-      home: const SettingsPage(),
+      home: InitPage(),
+      // home: MockDrill(),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -9,14 +8,33 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
-  String selectedGender = 'Male';
   TextEditingController emergencyPhoneNumberCon = TextEditingController();
   TextEditingController name = TextEditingController();
-  TextEditingController relationEmergencyContact = TextEditingController();
+  String selectedGender = 'Male';
   String selectedBloodGroup = 'A+';
+  String selectedRelationship = 'Father';
   DateTime selectedDOB = DateTime.now();
   List<String> genderOptions = ['Male', 'Female', 'Prefer not to say', 'Others'];
   List<String> bloodGroupOptions = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
+  List<String> relationshipOptions = [
+    'Father',
+    'Mother',
+    'Spouse',
+    'Brother',
+    'Sister',
+    'Son',
+    'Daughter',
+    'Grandfather',
+    'Grandmother',
+    'Uncle',
+    'Aunt',
+    'Cousin',
+    'Friend',
+    'Neighbor',
+    'Colleague',
+    'Other',
+    // MORE RELATIONS CAN BE ADDED
+  ];
 
   bool isValidPhoneNumber() {
     return emergencyPhoneNumberCon.text.replaceAll(RegExp(r'\D'), '').length == 10;
@@ -32,7 +50,7 @@ class _FormPageState extends State<FormPage> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
               child: const Text("OK"),
             ),
@@ -45,172 +63,114 @@ class _FormPageState extends State<FormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff7f6fb),
-      body: SafeArea(
+      appBar: AppBar(
+        title: const Text('User Information'),
+        backgroundColor: Colors.deepPurple.shade50,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 15),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 18,
-                ),
-                const Text(
-                  'User Information',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purple, // Title color
-                  ),
-                ),
-                const SizedBox(
-                  height: 28,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(28),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 3,
-                        blurRadius: 6,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      _buildTextField(label: 'Name', con: name),
-                      const SizedBox(height: 18),
-                      _buildDatePickerRow(
-                        label: 'Date of Birth',
-                        selectedDate: selectedDOB,
-                        onDateChanged: (date) {
-                          setState(() {
-                            selectedDOB = date;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 18),
-                      _buildDropdownRow(
-                        label: 'Gender',
-                        value: selectedGender,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedGender = value!;
-                          });
-                        },
-                        items: genderOptions,
-                      ),
-                      const SizedBox(height: 18),
-                      _buildDropdownRow(
-                        label: 'Blood Group',
-                        value: selectedBloodGroup,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedBloodGroup = value!;
-                          });
-                        },
-                        items: bloodGroupOptions,
-                      ),
-                      const SizedBox(height: 18),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        child: TextFormField(
-                          controller: emergencyPhoneNumberCon,
-                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                          maxLength: 10,
-                          keyboardType: TextInputType.phone,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          decoration: InputDecoration(
-                            prefix: const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8),
-                              child: Text(
-                                '(+91)',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            labelText: "Emergency Contact",
-                            labelStyle: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.purple, // Label color
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.purple),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.purple),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 18),
-                      _buildTextField(
-                        label: 'Relationship with Emergency Contact',
-                        con: relationEmergencyContact,
-                      ),
-                      const SizedBox(
-                        height: 22,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Handle form submission
-                            if (isValidPhoneNumber() == false) {
-                              showInvalidPhoneNumberPopup(context);
-                            }
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildTextField(label: 'Name', con: name),
+              const SizedBox(height: 16),
+              _buildDatePickerRow(
+                label: 'Date of Birth',
+                selectedDate: selectedDOB,
+                onDateChanged: (date) {
+                  setState(() {
+                    selectedDOB = date;
+                  });
+                },
+              ),
+              const SizedBox(height: 16),
+              _buildDropdownRow(
+                label: 'Gender',
+                value: selectedGender,
+                onChanged: (value) {
+                  setState(() {
+                    selectedGender = value!;
+                  });
+                },
+                items: genderOptions,
+              ),
+              const SizedBox(height: 16),
+              _buildDropdownRow(
+                label: 'Blood Group',
+                value: selectedBloodGroup,
+                onChanged: (value) {
+                  setState(() {
+                    selectedBloodGroup = value!;
+                  });
+                },
+                items: bloodGroupOptions,
+              ),
+              const SizedBox(height: 16),
+              _buildTextField(
+                label: 'Emergency Contact',
+                con: emergencyPhoneNumberCon,
+                keyboardType: TextInputType.phone,
+                prefixText: '(+91) ',
+              ),
+              const SizedBox(height: 16),
+              _buildDropdownRow(
+                label: 'Relationship with Emergency Contact',
+                value: selectedRelationship,
+                onChanged: (value) {
+                  setState(() {
+                    selectedRelationship = value!;
+                  });
+                },
+                items: relationshipOptions,
+              ),
+              const SizedBox(height: 32.0),
+              ElevatedButton(
+                onPressed: () {
+                  // HANDLE FORM SUBMISSION
+                  if (isValidPhoneNumber() == false) {
+                    showInvalidPhoneNumberPopup(context);
+                  }
 
-                            if (name.text == "") {
-                              print("USER DIDN'T ENTER NAMEEEEEEEEEEEEEEEEEEEE");
-                            } else if (relationEmergencyContact.text == "") {
-                              print("USER DIDN'T ENTER FAMILY NAME");
-                            } else {
-                              print(name.text);
-                              print(relationEmergencyContact.text);
-                            }
-                          },
-                          style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(24.0),
-                              ),
-                            ),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(14.0),
-                            child: Text(
-                              'Submit',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
+                  if (name.text == "") {
+                    print("USER DIDN'T ENTER NAME");
+                  } else {
+                    print(name.text);
+                    print(selectedDOB);
+                    print(selectedGender);
+                    print(selectedBloodGroup);
+                    print(selectedRelationship);
+                    print(emergencyPhoneNumberCon.text);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24.0),
                   ),
                 ),
-              ],
-            ),
+                child: const Padding(
+                  padding: EdgeInsets.all(14.0),
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildTextField({required String label, TextInputType? keyboardType, required TextEditingController con}) {
+  Widget _buildTextField({
+    required String label,
+    required TextEditingController con,
+    TextInputType? keyboardType,
+    String? prefixText,
+  }) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
@@ -225,16 +185,22 @@ class _FormPageState extends State<FormPage> {
           labelStyle: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.purple, // Label color
+            color: Color.fromRGBO(171, 71, 188, 1),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.purple),
+            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.purple),
+            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
             borderRadius: BorderRadius.circular(12),
           ),
+          prefixText: prefixText,
+          prefixStyle: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
         ),
       ),
     );
@@ -245,46 +211,50 @@ class _FormPageState extends State<FormPage> {
     required DateTime selectedDate,
     required ValueChanged<DateTime> onDateChanged,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.purple, // Label color
-          ),
-        ),
-        const SizedBox(height: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "${selectedDate.toLocal()}".split(' ')[0],
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black, // Date color
-                ),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8),
+          TextFormField(
+            readOnly: true,
+            onTap: () => _selectDate(context, selectedDate, onDateChanged),
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            decoration: InputDecoration(
+              labelText: 'Date of Birth',
+              labelStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(171, 71, 188, 1),
               ),
-              GestureDetector(
-                onTap: () => _selectDate(context, selectedDate, onDateChanged),
-                child: const Icon(
-                  Icons.calendar_today,
-                  size: 24,
-                  color: Colors.purple, // Calendar icon color
-                ),
+              hintText:
+                  "${"${selectedDate.toLocal()}".split(' ')[0].split('-')[2]}-${"${selectedDate.toLocal()}".split(' ')[0].split('-')[1]}-${"${selectedDate.toLocal()}".split(' ')[0].split('-')[0]}",
+              hintStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-            ],
+              suffixIcon: const Icon(
+                Icons.calendar_today,
+                size: 24,
+                color: Color.fromRGBO(171, 71, 188, 1),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -309,7 +279,7 @@ class _FormPageState extends State<FormPage> {
     }
   }
 
-  static Widget _buildDropdownRow({
+  Widget _buildDropdownRow({
     required String label,
     required String value,
     required ValueChanged<String?> onChanged,
@@ -317,28 +287,31 @@ class _FormPageState extends State<FormPage> {
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.purple, // Label color
-            ),
+      child: DropdownButtonFormField<String>(
+        value: value,
+        onChanged: onChanged,
+        items: items.map((String item) {
+          return DropdownMenuItem<String>(
+            value: item,
+            child: Text(item),
+          );
+        }).toList(),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color.fromRGBO(171, 71, 188, 1),
           ),
-          DropdownButton<String>(
-            value: value,
-            onChanged: onChanged,
-            items: items.map((String item) {
-              return DropdownMenuItem<String>(
-                value: item,
-                child: Text(item),
-              );
-            }).toList(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+            borderRadius: BorderRadius.circular(12),
           ),
-        ],
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
       ),
     );
   }

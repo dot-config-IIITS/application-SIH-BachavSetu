@@ -29,6 +29,7 @@ class _InitPageState extends State<InitPage> {
         index: _selectedPage,
         backgroundColor: Colors.transparent,
         color: Colors.deepPurple.shade50,
+        height: 55,
         animationDuration: const Duration(milliseconds: 300),
         onTap: (index) {
           // print(index);
