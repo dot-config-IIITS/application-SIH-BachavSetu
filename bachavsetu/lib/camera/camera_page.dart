@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+
+import 'dart:convert';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -33,6 +36,36 @@ class _CameraPageState extends State<CameraPage> {
     'Option14',
     'Option15',
   ];
+
+  late List<String> stateNames;
+  Map<String, List<String>> districts = {};
+  late String selectedStateName;
+  late String selectedDistrict;
+  String feedback = '';
+
+  @override
+  void initState() {
+    super.initState();
+    selectedStateName = 'xd';
+    selectedDistrict = '';
+    stateNames = [];
+    _loadStatesAndDistricts();
+  }
+
+  Future<void> _loadStatesAndDistricts() async {
+    final String data = await rootBundle.loadString('assets/settingsAssets/states_districts.json');
+    final Map<String, dynamic> statesData = json.decode(data);
+
+    statesData.forEach((key, value) {
+      stateNames.add(value['name']);
+      districts[value['name']] = List<String>.from(value['districts']);
+    });
+
+    setState(() {
+      selectedStateName = stateNames.isNotEmpty ? stateNames[0] : '';
+      selectedDistrict = districts[selectedStateName]!.isNotEmpty ? districts[selectedStateName]![0] : '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,15 +166,101 @@ class _CameraPageState extends State<CameraPage> {
                       'Select Disaster Type',
                       style: TextStyle(fontSize: 16),
                     ),
-                    DropdownButton<String>(
-                      value: selectedDisasterOption,
-                      onChanged: _onDropdownChanged,
-                      items: disasterOption.map((option) {
-                        return DropdownMenuItem<String>(
-                          value: option,
-                          child: Text(option),
-                        );
-                      }).toList(),
+                    Flexible(
+                      child: DropdownButton<String>(
+                        underline: Container(),
+                        value: selectedDisasterOption,
+                        onChanged: _onDropdownChanged,
+                        items: disasterOption.map((option) {
+                          return DropdownMenuItem<String>(
+                            value: option,
+                            child: Text(option),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                width: 300,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Select State',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Flexible(
+                      child: DropdownButton<String>(
+                        underline: Container(),
+                        isExpanded: true,
+                        value: selectedStateName,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedStateName = value!;
+                            selectedDistrict = districts[value]!.isNotEmpty ? districts[value]![0] : '';
+                          });
+                        },
+                        items: stateNames.map((option) {
+                          return DropdownMenuItem<String>(
+                            value: option,
+                            child: Text(
+                              option,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                width: 300,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Select District',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Flexible(
+                      child: DropdownButton<String>(
+                        underline: Container(),
+                        isExpanded: true,
+                        value: selectedDistrict,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedDistrict = value!;
+                          });
+                        },
+                        items: districts[selectedStateName]?.map((district) {
+                              return DropdownMenuItem<String>(
+                                value: district,
+                                child: Text(district),
+                              );
+                            }).toList() ??
+                            [],
+                      ),
                     ),
                   ],
                 ),

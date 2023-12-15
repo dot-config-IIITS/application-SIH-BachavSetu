@@ -1,3 +1,4 @@
+import 'package:bachavsetu/camera/camera_page.dart';
 import 'package:bachavsetu/login/welcome.dart';
 import 'package:flutter/material.dart';
 import 'login/socket_manager.dart';
@@ -17,14 +18,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BachavSetu',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'GE Inspira'),
-      // home: Welcome(),
-      // home: ArticleHomePage(),
-      // home: InitPage(),
-      // home: MockDrill(),
-      home: SettingsPage(),
-    );
+        title: 'BachavSetu',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'GE Inspira'),
+        // home: Welcome(),
+        // home: ArticleHomePage(),
+        // home: InitPage(),
+        // home: MockDrill(),
+        // home: SettingsPage(),
+        home: CameraPage());
   }
 }
