@@ -55,8 +55,8 @@ class Earthquake extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Center(
-                child: Image.network(
-                  'https://placekitten.com/200/150', // Replace with actual image URL
+                child: Image.asset(
+                  'assets/settingsAssets/avatar.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -76,8 +76,9 @@ class Earthquake extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Center(
-                child: Image.network(
-                    'https://placekitten.com/200/150'), // Replace with actual image URL
+                child: Image.asset(
+                  'assets/settingsAssets/avatar.png',
+                ),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -96,8 +97,9 @@ class Earthquake extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Center(
-                child: Image.network(
-                    'https://placekitten.com/200/150'), // Replace with actual image URL
+                child: Image.asset(
+                  'assets/settingsAssets/avatar.png',
+                ),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -113,8 +115,9 @@ class Earthquake extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Center(
-                child: Image.network(
-                    'https://placekitten.com/200/150'), // Replace with actual image URL
+                child: Image.asset(
+                  'assets/settingsAssets/avatar.png',
+                ),
               ),
               const SizedBox(height: 8),
               const Text(
