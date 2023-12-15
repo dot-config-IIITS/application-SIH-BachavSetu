@@ -1,7 +1,9 @@
+import 'package:bachavsetu/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'login/socket_manager.dart';
 import 'init_page.dart';
-import 'login/welcome.dart';
+import 'settings/settings_page.dart';
+import 'login/form.dart';
 import 'article/articlehomepage.dart';
 
 void main() {
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'GE Inspira'),
       // home: Welcome(),
       // home: ArticleHomePage(),
-      home: InitPage(),
+      // home: InitPage(),
+      home: const SettingsPage(),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FormPage extends StatefulWidget {
-  const FormPage({Key? key}) : super(key: key);
+  const FormPage({super.key});
 
   @override
   _FormPageState createState() => _FormPageState();
@@ -45,7 +45,6 @@ class _FormPageState extends State<FormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xfff7f6fb),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -310,7 +309,7 @@ class _FormPageState extends State<FormPage> {
     }
   }
 
-  Widget _buildDropdownRow({
+  static Widget _buildDropdownRow({
     required String label,
     required String value,
     required ValueChanged<String?> onChanged,
