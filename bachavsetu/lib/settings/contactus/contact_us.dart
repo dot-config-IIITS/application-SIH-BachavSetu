@@ -7,6 +7,12 @@ import 'contact_card.dart';
 class ContactUsPage extends StatelessWidget {
   final List<ContactCard> developers = [
     ContactCard(
+      name: '.config',
+      role: 'Our Team',
+      githubUrl: 'https://github.com/dot-config',
+      linkedinUrl: 'mailto:dotconfig@proton.me?subject=From BachavSetu App',
+    ),
+    ContactCard(
       name: 'Vinayak Anand',
       role: 'Flutter Developer',
       githubUrl: 'https://github.com/Vinayak-Anand',
@@ -128,10 +134,15 @@ class ContactCardWidget extends StatelessWidget {
                       InkWell(
                         onTap: () =>
                             _launchUrl(Uri.parse(contactCard.linkedinUrl)),
-                        child: const Icon(
-                          Ionicons.logo_linkedin,
-                          size: 24.0,
-                        ),
+                        child: contactCard.linkedinUrl.contains('@')
+                            ? const Icon(
+                                Ionicons.mail,
+                                size: 24.0,
+                              )
+                            : const Icon(
+                                Ionicons.logo_linkedin,
+                                size: 24.0,
+                              ),
                       ),
                     ],
                   ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'article/articlehomepage.dart';
 import 'edit_item.dart';
+import 'faq/faq.dart';
 import 'forward_button.dart';
 import 'other/privacy_policy.dart';
 import 'other/terms_and_conditions.dart';
@@ -164,7 +165,14 @@ class _AccountScreenState extends State<SettingsPage> {
                 icon: Ionicons.help_circle,
                 bgColor: Colors.blue.shade100,
                 iconColor: Colors.blue,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FAQPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(
