@@ -90,6 +90,22 @@ class _AccountScreenState extends State<SettingsPage> {
               ),
               const SizedBox(height: 40),
               SettingItem(
+                title: "Emergency Contact",
+                icon: Ionicons.call,
+                bgColor: Colors.deepPurple.shade100,
+                iconColor: Colors.deepPurple,
+                value: "English",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MockDrill(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 40),
+              SettingItem(
                 title: "Mock Drills",
                 icon: Ionicons.analytics,
                 bgColor: Colors.deepPurple.shade100,
