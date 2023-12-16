@@ -1,5 +1,6 @@
 import 'package:bachavsetu/settings/article/articles_details_page.dart';
 import 'package:bachavsetu/settings/contactus/contact_us.dart';
+import 'package:bachavsetu/settings/emergency/emergency_contact.dart';
 import 'package:bachavsetu/settings/feedback/feedback.dart';
 import 'package:bachavsetu/settings/mockdrill/mock_drill.dart';
 import 'package:flutter/material.dart';
@@ -99,7 +100,7 @@ class _AccountScreenState extends State<SettingsPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MockDrill(),
+                      builder: (context) => Emergency(),
                     ),
                   );
                 },
