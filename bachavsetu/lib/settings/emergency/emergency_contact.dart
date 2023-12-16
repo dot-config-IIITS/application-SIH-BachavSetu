@@ -16,7 +16,7 @@ class _EmergencyState extends State<Emergency> {
     'Railway Accident Emergency Service': '1072',
     'Road Accident Emergency Service': '1073',
     'Air Ambulance': '9540161344',
-    'National Disaster Response Force (NDRF)': '1070 / 011-26701728',
+    'National Disaster Response Force (NDRF)': '011-26701728',
     'Indian Red Cross Society': '011-23716441',
     'Disaster Distress Helpline': '1078',
     'Helpline for Natural Disasters': '011-26701836',
@@ -26,7 +26,7 @@ class _EmergencyState extends State<Emergency> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Emergency Contact Page'),
+        title: const Text('Emergency Contact Page'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -40,7 +40,7 @@ class _EmergencyState extends State<Emergency> {
             return ListTile(
               title: Text(entry.key),
               trailing: IconButton(
-                icon: Icon(Icons.call, color: Colors.green),
+                icon: const Icon(Icons.call, color: Colors.green),
                 onPressed: () async {
                   final Uri url = Uri(
                       scheme: 'tel',

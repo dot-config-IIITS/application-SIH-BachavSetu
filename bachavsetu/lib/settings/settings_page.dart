@@ -91,7 +91,7 @@ class _AccountScreenState extends State<SettingsPage> {
               ),
               const SizedBox(height: 40),
               SettingItem(
-                title: "Emergency Contact",
+                title: "Emergency",
                 icon: Ionicons.call,
                 bgColor: Colors.deepPurple.shade100,
                 iconColor: Colors.deepPurple,
@@ -105,7 +105,7 @@ class _AccountScreenState extends State<SettingsPage> {
                   );
                 },
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
               SettingItem(
                 title: "Mock Drills",
                 icon: Ionicons.analytics,
