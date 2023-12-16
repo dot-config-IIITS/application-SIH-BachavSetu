@@ -1,4 +1,7 @@
+import 'package:bachavsetu/init_page.dart';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 import 'form.dart';
 import 'login.dart';
@@ -207,8 +210,16 @@ class _OtpState extends State<Otp> {
                             print(data);
                             if (data['status'] == 'Wrong OTP') {
                               showInvalidOTPPopup(context);
+                            } else if (data['status'] == 'details_not_filled') {
+                              if (data['token'] != null) {
+                                context.read<UserDataModel>().updateToken(data['token']!);
+                                print('The token is ${context.read<UserDataModel>().token} =====================================');
+                                Navigator.of(context).push(_createPageRoute());
+                              } else {
+                                print("The token is null?");
+                              }
                             } else {
-                              Navigator.of(context).push(_createPageRoute());
+                              Navigator.of(context).push(pageRouteInit());
                             }
                           });
                           socket.emit("verify_otp", {'phone': Login.getPhoneNumber(), 'otp': userotp});
@@ -262,6 +273,33 @@ class _OtpState extends State<Otp> {
           ),
         ),
       ),
+    );
+  }
+
+  PageRouteBuilder<dynamic> pageRouteInit() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => const FormPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = 0.0;
+        const end = 1.0;
+        var curve = Curves.easeInOut;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        var opacityAnimation = animation.drive(tween);
+
+        var scaleTween = Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+
+        var scaleAnimation = animation.drive(scaleTween);
+
+        return Opacity(
+          opacity: opacityAnimation.value,
+          child: Transform.scale(
+            scale: scaleAnimation.value,
+            child: child,
+          ),
+        );
+      },
     );
   }
 

@@ -1,4 +1,8 @@
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:bachavsetu/login/socket_manager.dart';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -136,11 +140,27 @@ class _FormPageState extends State<FormPage> {
                     print("USER DIDN'T ENTER NAME");
                   } else {
                     print(name.text);
-                    print(selectedDOB);
+                    context.read<UserDataModel>().updateName(name.text);
+                    print('${selectedDOB.day}-${selectedDOB.month}-${selectedDOB.year}');
                     print(selectedGender);
+                    context.read<UserDataModel>().updateGender(selectedGender);
                     print(selectedBloodGroup);
+                    context.read<UserDataModel>().updateBloodGroup(selectedBloodGroup);
                     print(selectedRelationship);
+                    context.read<UserDataModel>().updateERelation(selectedRelationship);
                     print(emergencyPhoneNumberCon.text);
+                    context.read<UserDataModel>().updateEContact(emergencyPhoneNumberCon.text);
+                    print(context.read<UserDataModel>().phone);
+                    IO.Socket socket = SocketManager.getSocket();
+                    socket.on("add_details_result", (data) => {print(data)});
+                    socket.emit("add_details", {
+                      'name': context.read<UserDataModel>().name,
+                      'dob': context.read<UserDataModel>().dob,
+                      'blood_group': context.read<UserDataModel>().bloodGroup,
+                      'emergency_contact': context.read<UserDataModel>().emergencyContact,
+                      'gender': context.read<UserDataModel>().gender,
+                      'relation': context.read<UserDataModel>().emergencyRelation
+                    });
                   }
                 },
                 style: ElevatedButton.styleFrom(

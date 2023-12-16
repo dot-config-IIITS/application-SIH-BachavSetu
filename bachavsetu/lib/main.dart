@@ -1,6 +1,8 @@
 import 'package:bachavsetu/camera/camera_page.dart';
 import 'package:bachavsetu/login/welcome.dart';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'login/socket_manager.dart';
 import 'init_page.dart';
 import 'settings/settings_page.dart';
@@ -8,7 +10,12 @@ import 'login/form.dart';
 import 'settings/article/articlehomepage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => UserDataModel()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,9 +27,9 @@ class MyApp extends StatelessWidget {
       title: 'BachavSetu',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'GE Inspira'),
-      // home: Welcome(),
+      home: Welcome(),
       // home: ArticleHomePage(),
-      home: InitPage(),
+      // home: InitPage(),
       // home: MockDrill(),
       // home: SettingsPage(),
     );
