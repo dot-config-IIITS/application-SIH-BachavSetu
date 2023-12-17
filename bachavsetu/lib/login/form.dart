@@ -144,6 +144,7 @@ class _FormPageState extends State<FormPage> {
                     print(name.text);
                     context.read<UserDataModel>().updateName(name.text);
                     print('${selectedDOB.day}-${selectedDOB.month}-${selectedDOB.year}');
+                    context.read<UserDataModel>().updateDOB('${selectedDOB.day}-${selectedDOB.month}-${selectedDOB.year}');
                     print(selectedGender);
                     context.read<UserDataModel>().updateGender(selectedGender);
                     print(selectedBloodGroup);
