@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bachavsetu/init_page.dart';
 import 'package:bachavsetu/utils/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -282,7 +283,7 @@ class _OtpState extends State<Otp> {
 
   PageRouteBuilder<dynamic> pageRouteInit() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => const FormPage(),
+      pageBuilder: (context, animation, secondaryAnimation) => const InitPage(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = 0.0;
         const end = 1.0;
