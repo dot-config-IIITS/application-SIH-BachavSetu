@@ -1,4 +1,4 @@
-import 'source_model.dart';
+import 'package:bachavsetu/settings/article/source_model.dart';
 
 class Article {
   Source? source;

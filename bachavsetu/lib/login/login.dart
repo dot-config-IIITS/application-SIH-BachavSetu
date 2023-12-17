@@ -1,10 +1,11 @@
-import 'package:bachavsetu/providers/user_data_provider.dart';
+import 'otp.dart';
+import 'socket_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'socket_manager.dart';
-import 'otp.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import 'package:bachavsetu/providers/user_data_provider.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -30,7 +31,8 @@ class _LoginState extends State<Login> {
   }
 
   bool isValidPhoneNumber() {
-    return phoneNumberController.text.replaceAll(RegExp(r'\D'), '').length == 10;
+    return phoneNumberController.text.replaceAll(RegExp(r'\D'), '').length ==
+        10;
   }
 
   void showInvalidPhoneNumberPopup(BuildContext context) {
@@ -43,7 +45,7 @@ class _LoginState extends State<Login> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
               child: const Text("OK"),
             ),
@@ -165,7 +167,9 @@ class _LoginState extends State<Login> {
                         if (isValidPhoneNumber()) {
                           String phoneNumber = phoneNumberController.text;
                           print('Phone Number : $phoneNumber');
-                          context.read<UserDataModel>().updatePhone(phoneNumber);
+                          context
+                              .read<UserDataModel>()
+                              .updatePhone(phoneNumber);
                           IO.Socket socket = SocketManager.getSocket();
                           socket.emit("get_otp", {'phone': phoneNumber});
                           Navigator.of(context).push(_createPageRoute());
@@ -174,9 +178,12 @@ class _LoginState extends State<Login> {
                         }
                       },
                       style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.purple),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.0),
                           ),
@@ -212,11 +219,13 @@ class _LoginState extends State<Login> {
         const end = 1.0;
         var curve = Curves.easeInOut;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         var opacityAnimation = animation.drive(tween);
 
-        var scaleTween = Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+        var scaleTween =
+            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
 
         var scaleAnimation = animation.drive(scaleTween);
 

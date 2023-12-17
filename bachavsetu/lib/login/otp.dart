@@ -1,13 +1,13 @@
-import 'package:bachavsetu/init_page.dart';
-import 'package:bachavsetu/providers/user_data_provider.dart';
+import 'dart:async';
 import 'package:bachavsetu/utils/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
-import 'form.dart';
-import 'login.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'socket_manager.dart';
+
+import 'package:bachavsetu/login/form.dart';
+import 'package:bachavsetu/login/login.dart';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 
 class Otp extends StatefulWidget {
   const Otp({Key? key}) : super(key: key);

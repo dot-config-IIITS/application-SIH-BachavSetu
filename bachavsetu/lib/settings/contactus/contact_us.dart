@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'contact_card.dart';
+import 'package:bachavsetu/settings/contactus/contact_card.dart';
 
 class ContactUsPage extends StatelessWidget {
   final List<ContactCard> developers = [
