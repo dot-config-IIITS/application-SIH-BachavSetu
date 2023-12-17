@@ -47,7 +47,8 @@ class _OtpState extends State<Otp> {
   }
 
   void _resendOtp() {
-    // Add logic to resend OTP
+    IO.Socket socket = SocketManager.getSocket();
+    socket.emit("get_otp", {'phone': Login.getPhoneNumber()});
 
     setState(() {
       _resendButtonEnabled = false;

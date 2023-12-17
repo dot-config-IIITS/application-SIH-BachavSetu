@@ -1,6 +1,8 @@
 import 'package:bachavsetu/login/form.dart';
 import 'package:bachavsetu/login/socket_manager.dart';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:bachavsetu/utils/user_preferences.dart';
+import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import '../settings/article/articlehomepage.dart';
 import '/init_page.dart';
@@ -19,6 +21,17 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
+    void updateDetails(String name, String phone, String gender, String dob, String Econtact, String Erelation, String BloodGroup, String token) {
+      context.read<UserDataModel>().updateName(name);
+      context.read<UserDataModel>().updatePhone(phone);
+      context.read<UserDataModel>().updateGender(gender);
+      context.read<UserDataModel>().updateDOB(dob);
+      context.read<UserDataModel>().updateEContact(Econtact);
+      context.read<UserDataModel>().updateERelation(Erelation);
+      context.read<UserDataModel>().updateBloodGroup(BloodGroup);
+      context.read<UserDataModel>().updateToken(token);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xfff7f6fb),
@@ -97,7 +110,9 @@ class _WelcomeState extends State<Welcome> {
                         Navigator.of(context).push(_createPageRoute());
                       } else if (data['status'] == 'details_not_filled') {
                         Navigator.of(context).push(_createPageRouteDetails());
-                      } else {
+                      } else if (data['status'] == 'details_filled') {
+                        updateDetails(data['name'], data["phone"], data['gender'], data['dob'], data['emergency_contact'], data['relation'],
+                            data['blood_group'], token!);
                         Navigator.of(context).push(_createPageRouteInit());
                       }
                     });
