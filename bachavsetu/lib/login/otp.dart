@@ -1,5 +1,6 @@
 import 'package:bachavsetu/init_page.dart';
 import 'package:bachavsetu/providers/user_data_provider.dart';
+import 'package:bachavsetu/utils/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
@@ -213,6 +214,8 @@ class _OtpState extends State<Otp> {
                             } else if (data['status'] == 'details_not_filled') {
                               if (data['token'] != null) {
                                 context.read<UserDataModel>().updateToken(data['token']!);
+                                UserPreferences.setToken(data['token']);
+                                UserPreferences.setPhone(Login.getPhoneNumber());
                                 print('The token is ${context.read<UserDataModel>().token} =====================================');
                                 Navigator.of(context).push(_createPageRoute());
                               } else {
