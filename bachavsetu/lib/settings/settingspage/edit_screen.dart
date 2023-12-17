@@ -2,8 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-import 'package:bachavsetu/settings/edit_item.dart';
-import 'package:bachavsetu/settings/edit_item2.dart';
+import 'package:bachavsetu/settings/settingspage/edit_item.dart';
+import 'package:bachavsetu/settings/settingspage/edit_item2.dart';
 
 class EditAccountScreen extends StatefulWidget {
   const EditAccountScreen({super.key});

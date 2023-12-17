@@ -9,9 +9,9 @@ import 'package:bachavsetu/settings/mockdrill/mock_drill.dart';
 import 'package:bachavsetu/settings/other/privacy_policy.dart';
 import 'package:bachavsetu/settings/other/terms_and_conditions.dart';
 import 'package:bachavsetu/settings/faq/faq.dart';
-import 'package:bachavsetu/settings/forward_button.dart';
-import 'package:bachavsetu/settings/setting_item.dart';
-import 'package:bachavsetu/settings/edit_screen.dart';
+import 'package:bachavsetu/settings/settingspage/forward_button.dart';
+import 'package:bachavsetu/settings/settingspage/setting_item.dart';
+import 'package:bachavsetu/settings/settingspage/edit_screen.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

@@ -79,39 +79,95 @@ class _CameraPageState extends State<CameraPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     ElevatedButton(
+              //       onPressed: () {
+              //         _pickImage();
+              //       },
+              //       child: const Icon(Icons.photo),
+              //     ),
+              //     ElevatedButton(
+              //       onPressed: () {
+              //         _captureImage();
+              //       },
+              //       child: const Icon(Icons.camera),
+              //     ),
+              //     ElevatedButton(
+              //       onPressed: () {
+              //         _pickVideo();
+              //       },
+              //       child: const Icon(Icons.video_library),
+              //     ),
+              //     ElevatedButton(
+              //       onPressed: () {
+              //         _recordVideo();
+              //       },
+              //       child: const Icon(Icons.videocam),
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(height: 15),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     Container(
+              //       width: 150,
+              //       height: 150,
+              //       decoration: BoxDecoration(
+              //         border: Border.all(color: Colors.grey),
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       child: Center(
+              //         child: imageFile == null
+              //             ? const Text('No image selected')
+              //             : Image.file(
+              //                 File(imageFile!.path),
+              //                 height: 150,
+              //                 width: 150,
+              //               ),
+              //       ),
+              //     ),
+              //     Container(
+              //       width: 150,
+              //       height: 150,
+              //       decoration: BoxDecoration(
+              //         border: Border.all(color: Colors.grey),
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       child: Center(
+              //         child: videoFile == null
+              //             ? const Text('No video selected')
+              //             : Image.file(
+              //                 File(videoFile!.path),
+              //                 height: 150,
+              //                 width: 150,
+              //               ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _pickImage();
-                    },
-                    child: const Icon(Icons.photo),
+                  Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          _captureImage();
+                        },
+                        child: const Icon(Icons.camera),
+                      ),
+                      SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          _pickImage();
+                        },
+                        child: const Icon(Icons.photo),
+                      ),
+                    ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _captureImage();
-                    },
-                    child: const Icon(Icons.camera),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _pickVideo();
-                    },
-                    child: const Icon(Icons.video_library),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _recordVideo();
-                    },
-                    child: const Icon(Icons.videocam),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
                   Container(
                     width: 150,
                     height: 150,
@@ -129,25 +185,9 @@ class _CameraPageState extends State<CameraPage> {
                             ),
                     ),
                   ),
-                  Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: videoFile == null
-                          ? const Text('No video selected')
-                          : Image.file(
-                              File(videoFile!.path),
-                              height: 150,
-                              width: 150,
-                            ),
-                    ),
-                  ),
                 ],
               ),
+
               const SizedBox(height: 20),
               // Dropdown menu for selecting the type of disaster/calamity
               Container(
