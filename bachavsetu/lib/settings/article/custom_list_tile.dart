@@ -1,6 +1,7 @@
-import 'article_model.dart';
-import 'articles_details_page.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bachavsetu/settings/article/article_model.dart';
+import 'package:bachavsetu/settings/article/articles_details_page.dart';
 
 Widget customListTile(Article article, BuildContext context) {
   return InkWell(
@@ -15,12 +16,15 @@ Widget customListTile(Article article, BuildContext context) {
     child: Container(
       margin: const EdgeInsets.all(12.0),
       padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12.0), boxShadow: const [
-        BoxShadow(
-          color: Colors.black12,
-          blurRadius: 3.0,
-        ),
-      ]),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 3.0,
+            ),
+          ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +35,8 @@ Widget customListTile(Article article, BuildContext context) {
             decoration: BoxDecoration(
               //let's add the height
 
-              image: DecorationImage(image: NetworkImage(article.urlToImage!), fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: NetworkImage(article.urlToImage!), fit: BoxFit.cover),
               borderRadius: BorderRadius.circular(12.0),
             ),
           ),

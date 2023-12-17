@@ -1,20 +1,17 @@
-import 'package:bachavsetu/settings/article/articles_details_page.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:flutter/material.dart';
+
+import 'package:bachavsetu/settings/article/articlehomepage.dart';
 import 'package:bachavsetu/settings/contactus/contact_us.dart';
 import 'package:bachavsetu/settings/emergency/emergency_contact.dart';
 import 'package:bachavsetu/settings/feedback/feedback.dart';
 import 'package:bachavsetu/settings/mockdrill/mock_drill.dart';
-import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'article/articlehomepage.dart';
-import 'edit_item.dart';
-import 'faq/faq.dart';
-import 'forward_button.dart';
-import 'other/privacy_policy.dart';
-import 'other/terms_and_conditions.dart';
-import 'setting_item.dart';
-import 'setting_switch.dart';
-import 'edit_screen.dart';
-import 'package:bachavsetu/login/form.dart';
+import 'package:bachavsetu/settings/other/privacy_policy.dart';
+import 'package:bachavsetu/settings/other/terms_and_conditions.dart';
+import 'package:bachavsetu/settings/faq/faq.dart';
+import 'package:bachavsetu/settings/forward_button.dart';
+import 'package:bachavsetu/settings/setting_item.dart';
+import 'package:bachavsetu/settings/edit_screen.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

@@ -1,13 +1,10 @@
-import 'package:bachavsetu/camera/camera_page.dart';
-import 'package:bachavsetu/login/welcome.dart';
-import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'login/socket_manager.dart';
-import 'init_page.dart';
-import 'settings/settings_page.dart';
-import 'login/form.dart';
-import 'settings/article/articlehomepage.dart';
+
+import 'package:bachavsetu/providers/user_data_provider.dart';
+import 'package:bachavsetu/login/socket_manager.dart';
+import 'package:bachavsetu/init_page.dart';
+import 'package:bachavsetu/login/welcome.dart';
 
 void main() {
   runApp(MultiProvider(

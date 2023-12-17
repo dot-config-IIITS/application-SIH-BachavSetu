@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'mock_drill_model.dart';
 
-import '_all_export.dart';
+import 'package:bachavsetu/settings/mockdrill/mock_drill_model.dart';
+
+import 'package:bachavsetu/settings/mockdrill/_all_export.dart';
 
 class MockDrill extends StatefulWidget {
   const MockDrill({super.key});

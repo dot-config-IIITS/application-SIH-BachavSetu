@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-import 'home/home_page.dart';
-import 'camera/camera_page.dart';
-import 'settings/settings_page.dart';
+import 'package:bachavsetu/home/home_page.dart';
+import 'package:bachavsetu/camera/camera_page.dart';
+import 'package:bachavsetu/settings/settings_page.dart';
 
 class InitPage extends StatefulWidget {
   const InitPage({super.key});

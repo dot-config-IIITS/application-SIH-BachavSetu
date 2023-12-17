@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'customListTile.dart';
-import 'article_model.dart';
-import 'api_service.dart';
+import 'package:bachavsetu/settings/article/custom_list_tile.dart';
+import 'package:bachavsetu/settings/article/article_model.dart';
+import 'package:bachavsetu/settings/article/api_service.dart';
 
 class ArticleHomePage extends StatefulWidget {
   @override

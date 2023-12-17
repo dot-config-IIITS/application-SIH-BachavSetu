@@ -1,9 +1,9 @@
-import 'package:bachavsetu/login/form.dart';
-import 'edit_item2.dart';
 import 'package:flutter/services.dart';
-import 'edit_item.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+
+import 'package:bachavsetu/settings/edit_item.dart';
+import 'package:bachavsetu/settings/edit_item2.dart';
 
 class EditAccountScreen extends StatefulWidget {
   const EditAccountScreen({super.key});
@@ -14,9 +14,23 @@ class EditAccountScreen extends StatefulWidget {
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
   String gender = "Male";
-  List<String> genderOptions = ['Male', 'Female', 'Prefer not to say', 'Others'];
+  List<String> genderOptions = [
+    'Male',
+    'Female',
+    'Prefer not to say',
+    'Others'
+  ];
   String selectedBloodGroup = 'A+';
-  List<String> bloodGroupOptions = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
+  List<String> bloodGroupOptions = [
+    'A+',
+    'B+',
+    'AB+',
+    'O+',
+    'A-',
+    'B-',
+    'AB-',
+    'O-'
+  ];
   String selectedRelationship = 'Father';
   List<String> relationshipOptions = [
     'Father',

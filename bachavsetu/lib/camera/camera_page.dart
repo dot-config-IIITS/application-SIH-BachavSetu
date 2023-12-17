@@ -1,9 +1,8 @@
+import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-
-import 'dart:convert';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -18,23 +17,19 @@ class _CameraPageState extends State<CameraPage> {
   final picker = ImagePicker();
   String noteText = '';
   TextEditingController noteTextController = TextEditingController();
-  String selectedDisasterOption = 'Option1';
+  String selectedDisasterOption = 'Road Accident';
   List<String> disasterOption = [
-    'Option1',
-    'Option2',
-    'Option3',
-    'Option4',
-    'Option5',
-    'Option6',
-    'Option7',
-    'Option8',
-    'Option9',
-    'Option10',
-    'Option11',
-    'Option12',
-    'Option13',
-    'Option14',
-    'Option15',
+    'Chemical Spill',
+    'Cyclone',
+    'Earthquake',
+    'Fire',
+    'Flood',
+    'Power Outage',
+    'Road Accident',
+    'Tornado',
+    'Tsunami',
+    'Wild Fire',
+    'Winter Storm',
   ];
 
   late List<String> stateNames;

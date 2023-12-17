@@ -1,5 +1,6 @@
-import 'article_model.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bachavsetu/settings/article/article_model.dart';
 
 class ArticlePage extends StatelessWidget {
   final Article article;
@@ -22,7 +23,9 @@ class ArticlePage extends StatelessWidget {
               height: 200.0,
               width: double.infinity,
               decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(article.urlToImage ?? "null"), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: NetworkImage(article.urlToImage ?? "null"),
+                    fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(12.0),
               ),
             ),

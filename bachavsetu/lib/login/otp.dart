@@ -1,12 +1,12 @@
-import 'package:bachavsetu/init_page.dart';
-import 'package:bachavsetu/providers/user_data_provider.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
-import 'form.dart';
-import 'login.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'socket_manager.dart';
+
+import 'package:bachavsetu/login/form.dart';
+import 'package:bachavsetu/login/login.dart';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 
 class Otp extends StatefulWidget {
   const Otp({Key? key}) : super(key: key);
@@ -99,8 +99,12 @@ class _OtpState extends State<Otp> {
           maxLength: 1,
           decoration: InputDecoration(
             counter: const Offstage(),
-            enabledBorder: OutlineInputBorder(borderSide: const BorderSide(width: 2, color: Colors.black12), borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(width: 2, color: Colors.purple), borderRadius: BorderRadius.circular(12)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(width: 2, color: Colors.black12),
+                borderRadius: BorderRadius.circular(12)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(width: 2, color: Colors.purple),
+                borderRadius: BorderRadius.circular(12)),
           ),
         ),
       ),
@@ -182,16 +186,20 @@ class _OtpState extends State<Otp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: _textFieldOTP(first: true, last: false, order: 0),
+                          child:
+                              _textFieldOTP(first: true, last: false, order: 0),
                         ),
                         Expanded(
-                          child: _textFieldOTP(first: false, last: false, order: 1),
+                          child: _textFieldOTP(
+                              first: false, last: false, order: 1),
                         ),
                         Expanded(
-                          child: _textFieldOTP(first: false, last: false, order: 2),
+                          child: _textFieldOTP(
+                              first: false, last: false, order: 2),
                         ),
                         Expanded(
-                          child: _textFieldOTP(first: false, last: true, order: 3),
+                          child:
+                              _textFieldOTP(first: false, last: true, order: 3),
                         ),
                       ],
                     ),
@@ -204,7 +212,10 @@ class _OtpState extends State<Otp> {
                         onPressed: () {
                           // Perform OTP verification logic
                           // If verification successful, navigate to FormPage
-                          var userotp = otp_number[0] + otp_number[1] + otp_number[2] + otp_number[3];
+                          var userotp = otp_number[0] +
+                              otp_number[1] +
+                              otp_number[2] +
+                              otp_number[3];
                           IO.Socket socket = SocketManager.getSocket();
                           socket.on('verify_otp_result', (data) {
                             print(data);
@@ -212,8 +223,11 @@ class _OtpState extends State<Otp> {
                               showInvalidOTPPopup(context);
                             } else if (data['status'] == 'details_not_filled') {
                               if (data['token'] != null) {
-                                context.read<UserDataModel>().updateToken(data['token']!);
-                                print('The token is ${context.read<UserDataModel>().token} =====================================');
+                                context
+                                    .read<UserDataModel>()
+                                    .updateToken(data['token']!);
+                                print(
+                                    'The token is ${context.read<UserDataModel>().token} =====================================');
                                 Navigator.of(context).push(_createPageRoute());
                               } else {
                                 print("The token is null?");
@@ -222,12 +236,18 @@ class _OtpState extends State<Otp> {
                               Navigator.of(context).push(pageRouteInit());
                             }
                           });
-                          socket.emit("verify_otp", {'phone': Login.getPhoneNumber(), 'otp': userotp});
+                          socket.emit("verify_otp", {
+                            'phone': Login.getPhoneNumber(),
+                            'otp': userotp
+                          });
                         },
                         style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.purple),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(24.0),
                             ),
@@ -252,7 +272,9 @@ class _OtpState extends State<Otp> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: _resendButtonEnabled ? Colors.purple : Colors.grey,
+                          color: _resendButtonEnabled
+                              ? Colors.purple
+                              : Colors.grey,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -263,7 +285,8 @@ class _OtpState extends State<Otp> {
                     Text(
                       'In $_resendTimerInSeconds Seconds',
                       style: TextStyle(
-                        color: _resendButtonEnabled ? Colors.black38 : Colors.red,
+                        color:
+                            _resendButtonEnabled ? Colors.black38 : Colors.red,
                       ),
                     ),
                   ],
@@ -284,11 +307,13 @@ class _OtpState extends State<Otp> {
         const end = 1.0;
         var curve = Curves.easeInOut;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         var opacityAnimation = animation.drive(tween);
 
-        var scaleTween = Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+        var scaleTween =
+            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
 
         var scaleAnimation = animation.drive(scaleTween);
 
@@ -311,11 +336,13 @@ class _OtpState extends State<Otp> {
         const end = 1.0;
         var curve = Curves.easeInOut;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         var opacityAnimation = animation.drive(tween);
 
-        var scaleTween = Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
+        var scaleTween =
+            Tween(begin: 0.8, end: 1.0).chain(CurveTween(curve: curve));
 
         var scaleAnimation = animation.drive(scaleTween);
 

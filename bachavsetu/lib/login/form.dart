@@ -1,8 +1,9 @@
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:bachavsetu/login/socket_manager.dart';
-import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:bachavsetu/providers/user_data_provider.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -18,8 +19,22 @@ class _FormPageState extends State<FormPage> {
   String selectedBloodGroup = 'A+';
   String selectedRelationship = 'Father';
   DateTime selectedDOB = DateTime.now();
-  List<String> genderOptions = ['Male', 'Female', 'Prefer not to say', 'Others'];
-  List<String> bloodGroupOptions = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
+  List<String> genderOptions = [
+    'Male',
+    'Female',
+    'Prefer not to say',
+    'Others'
+  ];
+  List<String> bloodGroupOptions = [
+    'A+',
+    'B+',
+    'AB+',
+    'O+',
+    'A-',
+    'B-',
+    'AB-',
+    'O-'
+  ];
   List<String> relationshipOptions = [
     'Father',
     'Mother',
@@ -41,7 +56,8 @@ class _FormPageState extends State<FormPage> {
   ];
 
   bool isValidPhoneNumber() {
-    return emergencyPhoneNumberCon.text.replaceAll(RegExp(r'\D'), '').length == 10;
+    return emergencyPhoneNumberCon.text.replaceAll(RegExp(r'\D'), '').length ==
+        10;
   }
 
   void showInvalidPhoneNumberPopup(BuildContext context) {
@@ -141,15 +157,22 @@ class _FormPageState extends State<FormPage> {
                   } else {
                     print(name.text);
                     context.read<UserDataModel>().updateName(name.text);
-                    print('${selectedDOB.day}-${selectedDOB.month}-${selectedDOB.year}');
+                    print(
+                        '${selectedDOB.day}-${selectedDOB.month}-${selectedDOB.year}');
                     print(selectedGender);
                     context.read<UserDataModel>().updateGender(selectedGender);
                     print(selectedBloodGroup);
-                    context.read<UserDataModel>().updateBloodGroup(selectedBloodGroup);
+                    context
+                        .read<UserDataModel>()
+                        .updateBloodGroup(selectedBloodGroup);
                     print(selectedRelationship);
-                    context.read<UserDataModel>().updateERelation(selectedRelationship);
+                    context
+                        .read<UserDataModel>()
+                        .updateERelation(selectedRelationship);
                     print(emergencyPhoneNumberCon.text);
-                    context.read<UserDataModel>().updateEContact(emergencyPhoneNumberCon.text);
+                    context
+                        .read<UserDataModel>()
+                        .updateEContact(emergencyPhoneNumberCon.text);
                     print(context.read<UserDataModel>().phone);
                     IO.Socket socket = SocketManager.getSocket();
                     socket.on("add_details_result", (data) => {print(data)});
@@ -157,9 +180,11 @@ class _FormPageState extends State<FormPage> {
                       'name': context.read<UserDataModel>().name,
                       'dob': context.read<UserDataModel>().dob,
                       'blood_group': context.read<UserDataModel>().bloodGroup,
-                      'emergency_contact': context.read<UserDataModel>().emergencyContact,
+                      'emergency_contact':
+                          context.read<UserDataModel>().emergencyContact,
                       'gender': context.read<UserDataModel>().gender,
-                      'relation': context.read<UserDataModel>().emergencyRelation
+                      'relation':
+                          context.read<UserDataModel>().emergencyRelation
                     });
                   }
                 },
@@ -208,11 +233,13 @@ class _FormPageState extends State<FormPage> {
             color: Color.fromRGBO(171, 71, 188, 1),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+            borderSide:
+                const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+            borderSide:
+                const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
             borderRadius: BorderRadius.circular(12),
           ),
           prefixText: prefixText,
@@ -263,11 +290,13 @@ class _FormPageState extends State<FormPage> {
                 color: Color.fromRGBO(171, 71, 188, 1),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+                borderSide:
+                    const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+                borderSide:
+                    const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
                 borderRadius: BorderRadius.circular(12),
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -324,11 +353,13 @@ class _FormPageState extends State<FormPage> {
             color: Color.fromRGBO(171, 71, 188, 1),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+            borderSide:
+                const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
+            borderSide:
+                const BorderSide(color: Color.fromRGBO(171, 71, 188, 1)),
             borderRadius: BorderRadius.circular(12),
           ),
         ),

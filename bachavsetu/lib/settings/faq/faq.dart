@@ -1,5 +1,6 @@
-import 'package:bachavsetu/settings/faq/expansion.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bachavsetu/settings/faq/expansion.dart';
 
 class FAQPage extends StatelessWidget {
   @override

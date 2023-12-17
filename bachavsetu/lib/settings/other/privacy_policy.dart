@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../contactus/contact_us.dart';
+import 'package:bachavsetu/settings/contactus/contact_us.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'faq_item.dart';
+
+import 'package:bachavsetu/settings/faq/faq_item.dart';
 
 class ExpansionPanelListExample extends StatefulWidget {
   const ExpansionPanelListExample({super.key});
