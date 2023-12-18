@@ -6,7 +6,7 @@ import 'package:bachavsetu/settings/article/article_model.dart';
 
 class ApiService {
   final endPointUrl =
-      "https://newsapi.org/v2/top-headlines?country=in&apiKey=$NEWS_API_KEY";
+      "https://newsapi.org/v2/everything?q=disaster-management&apiKey=$NEWS_API_KEY";
 
   Future<List<Article>> getArticle() async {
     try {
