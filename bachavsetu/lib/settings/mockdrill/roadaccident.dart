@@ -55,7 +55,7 @@ class RoadAccident extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/roadaccident/i1.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -76,7 +76,7 @@ class RoadAccident extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/roadaccident/i2.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -88,44 +88,13 @@ class RoadAccident extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Text(
-                'Communication',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              const SizedBox(height: 8),
-              Center(
-                child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Exchange Information',
-              ),
-              const Text(
-                '1. Exchange names, addresses, phone numbers, insurance information, and vehicle details with other parties involved.',
-              ),
-              const Text(
-                '2. Obtain contact information for witnesses.',
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Document the Scene',
-              ),
-              const Text(
-                '1. Take pictures of the accident scene, including vehicle positions and damage.',
-              ),
-              const Text(
-                '2. Note road conditions and any relevant details.',
-              ),
-              const SizedBox(height: 16),
-              const Text(
                 'Medical Assistance',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/roadaccident/i3.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -146,7 +115,7 @@ class RoadAccident extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/roadaccident/i4.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -158,6 +127,31 @@ class RoadAccident extends StatelessWidget {
               ),
               const Text(
                 '3. Obtain a copy of the report for insurance purposes.',
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Communication',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Exchange Information',
+              ),
+              const Text(
+                '1. Exchange names, addresses, phone numbers, insurance information, and vehicle details with other parties involved.',
+              ),
+              const Text(
+                '2. Obtain contact information for witnesses.',
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Document the Scene',
+              ),
+              const Text(
+                '1. Take pictures of the accident scene, including vehicle positions and damage.',
+              ),
+              const Text(
+                '2. Note road conditions and any relevant details.',
               ),
               const SizedBox(height: 8),
               const Text(

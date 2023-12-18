@@ -55,7 +55,7 @@ class WildFire extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/wildfire/i1.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -73,7 +73,7 @@ class WildFire extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/wildfire/i2.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -91,7 +91,7 @@ class WildFire extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/wildfire/i3.png',
                 ),
               ),
               const SizedBox(height: 8),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Pandemic extends StatelessWidget {
-  const Pandemic({Key? key});
+class IndustrialAccident extends StatelessWidget {
+  const IndustrialAccident({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class Pandemic extends StatelessWidget {
               ],
             ),
             content: const Text(
-              'Pandemic Alert In Your Area!',
+              'Industrial Accident Alert!',
               textAlign: TextAlign.center,
             ),
             actions: [
@@ -38,9 +38,10 @@ class Pandemic extends StatelessWidget {
         },
       );
     });
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pandemic'),
+        title: const Text('Industrial Accident'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -49,54 +50,70 @@ class Pandemic extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Hygiene Practices',
+                'Before an Industrial Accident',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/industrialaccident/i1.png',
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
-                '1. Follow public health guidelines, including regular handwashing.',
+                '1. Be familiar with emergency exits and evacuation routes at your workplace.',
               ),
               const Text(
-                '2. Wear masks and practice social distancing.',
+                '2. Participate in workplace safety training and drills.',
+              ),
+              const Text(
+                '3. Know the locations of emergency equipment, such as fire extinguishers and first aid kits.',
               ),
               const SizedBox(height: 16),
               const Text(
-                'Stocking Up',
+                'During an Industrial Accident',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/industrialaccident/i2.png',
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
-                '1. Stock up on essential supplies, medications, and personal protective equipment.',
+                '1. Follow emergency procedures and evacuate the area immediately if instructed.',
               ),
               const Text(
-                '2. Have a plan for obtaining medications if needed.',
+                '2. Use protective equipment, such as safety goggles, gloves, and masks, if available.',
+              ),
+              const Text(
+                '3. If there\'s a chemical spill, move upwind to avoid inhaling toxic fumes.',
               ),
               const SizedBox(height: 16),
               const Text(
-                'Information',
+                'After an Industrial Accident',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/industrialaccident/i3.png',
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
-                '1. Stay informed about the latest updates from health authorities.',
+                '1. Seek medical attention for any injuries or exposure to hazardous substances.',
+              ),
+              const Text(
+                '2. Report the incident to your supervisor or designated authority.',
+              ),
+              const Text(
+                '3. Follow decontamination procedures if you were exposed to hazardous materials.',
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                '4. Cooperate with emergency responders and follow their instructions.',
               ),
             ],
           ),

@@ -56,7 +56,7 @@ class Earthquake extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/earthquake/i1.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -77,7 +77,7 @@ class Earthquake extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/earthquake/i2.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -98,7 +98,7 @@ class Earthquake extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/earthquake/i3.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -116,7 +116,7 @@ class Earthquake extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/earthquake/i4.png',
                 ),
               ),
               const SizedBox(height: 8),

@@ -55,7 +55,7 @@ class Cyclone extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/cyclone/i1.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -73,7 +73,7 @@ class Cyclone extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/cyclone/i2.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -94,7 +94,7 @@ class Cyclone extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/cyclone/i3.png',
                 ),
               ),
               const SizedBox(height: 8),

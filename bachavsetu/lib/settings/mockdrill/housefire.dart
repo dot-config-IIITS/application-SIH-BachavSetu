@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PowerOutage extends StatelessWidget {
-  const PowerOutage({Key? key});
+class HouseFire extends StatelessWidget {
+  const HouseFire({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class PowerOutage extends StatelessWidget {
               ],
             ),
             content: const Text(
-              'Power Outage Alert In Your Area!',
+              'House Fire Alert In Your Area!',
               textAlign: TextAlign.center,
             ),
             actions: [
@@ -40,7 +40,7 @@ class PowerOutage extends StatelessWidget {
     });
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Power Outage'),
+        title: const Text('House Fire'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -49,54 +49,57 @@ class PowerOutage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Emergency Lighting',
+                'Immediate Response',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/housefire/i1.png',
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
-                '1. Have a flashlight, batteries, and candles easily accessible.',
+                '1. Turn off the heat source if safe to do so.',
               ),
               const Text(
-                '2. Use battery-powered lanterns for area lighting.',
+                '2. Smother the fire with a lid or use a fire extinguisher.',
               ),
               const SizedBox(height: 16),
               const Text(
-                'Appliance Safety',
+                'Evacuation',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/housefire/i2.png',
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
-                '1. Unplug appliances to prevent surges when power is restored.',
+                '1. If the fire is spreading, evacuate everyone from the house.',
               ),
               const Text(
-                '2. Use generators outdoors in well-ventilated areas.',
+                '2. Close doors behind you to slow the fire\'s progress.',
               ),
               const SizedBox(height: 16),
               const Text(
-                'Communication',
+                'Alerting Others',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/housefire/i3.png',
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
-                '1. Conserve battery power on electronic devices; have a portable charger.',
+                '1. Call emergency services immediately.',
+              ),
+              const Text(
+                '2. Use a loud, clear alarm or shout to alert others in the house.',
               ),
             ],
           ),

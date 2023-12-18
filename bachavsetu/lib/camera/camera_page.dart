@@ -19,11 +19,12 @@ class _CameraPageState extends State<CameraPage> {
   TextEditingController noteTextController = TextEditingController();
   String selectedDisasterOption = 'Road Accident';
   List<String> disasterOption = [
-    'Chemical Spill',
     'Cyclone',
     'Earthquake',
     'Fire',
     'Flood',
+    'Industrial Accident',
+    'Land Slide',
     'Power Outage',
     'Road Accident',
     'Tornado',
@@ -338,6 +339,7 @@ class _CameraPageState extends State<CameraPage> {
                 },
                 child: const Text('Submit'),
               ),
+              const SizedBox(height: 30),
             ],
           ),
         ),

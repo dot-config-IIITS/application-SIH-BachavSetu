@@ -113,4 +113,17 @@ flutter:
   assets:
    - assets/loginAssets/
    - assets/settingsAssets/
-  #  - assets/mock/alert.mp3
+   - assets/mock/mock_drill/
+   - assets/mock/cyclone/
+   - assets/mock/earthquake/
+   - assets/mock/electricalfire/
+   - assets/mock/flood/
+   - assets/mock/gasfire/
+   - assets/mock/housefire/
+   - assets/mock/industrialaccident/
+   - assets/mock/landslide/
+   - assets/mock/roadaccident/
+   - assets/mock/tornado/
+   - assets/mock/tsunami/
+   - assets/mock/wildfire/
+   - assets/mock/winterstorm/

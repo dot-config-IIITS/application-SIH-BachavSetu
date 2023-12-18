@@ -55,7 +55,7 @@ class Flood extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/flood/i1.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -73,7 +73,7 @@ class Flood extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/flood/i2.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -88,7 +88,7 @@ class Flood extends StatelessWidget {
               const SizedBox(height: 8),
               Center(
                 child: Image.asset(
-                  'assets/settingsAssets/avatar.png',
+                  'assets/mock/flood/i3.png',
                 ),
               ),
               const SizedBox(height: 8),
@@ -97,6 +97,24 @@ class Flood extends StatelessWidget {
               ),
               const Text(
                 '2. Have an emergency kit containing important documents, medications, and basic supplies.',
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Information',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: Image.asset(
+                  'assets/mock/flood/i4.png',
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                '1. Stay informed about the flood\'s progress through weather updates.',
+              ),
+              const Text(
+                '2. Have a battery-powered radio for continuous information.',
               ),
             ],
           ),
