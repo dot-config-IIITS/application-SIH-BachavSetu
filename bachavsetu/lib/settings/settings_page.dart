@@ -29,6 +29,7 @@ class _AccountScreenState extends State<SettingsPage> {
       appBar: AppBar(
         title: const Text('Settings'),
         backgroundColor: Colors.deepPurple.shade50,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Padding(

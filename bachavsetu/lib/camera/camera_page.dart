@@ -70,8 +70,9 @@ class _CameraPageState extends State<CameraPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Camera Page'),
+        title: const Text('Report A Disaster'),
         backgroundColor: Colors.deepPurple.shade50,
+        automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.deepPurple.shade100,
       body: SingleChildScrollView(
