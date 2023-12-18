@@ -1,11 +1,11 @@
 class FAQItem {
   FAQItem({
-    required this.expandedValue,
-    required this.headerValue,
+    required this.question,
+    required this.answer,
     this.isExpanded = false,
   });
 
-  String expandedValue;
-  String headerValue;
+  String question;
+  String answer;
   bool isExpanded;
 }
