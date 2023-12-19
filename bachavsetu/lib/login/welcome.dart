@@ -25,6 +25,21 @@ class _WelcomeState extends State<Welcome> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+=======
+    void updateDetails(String name, String phone, String gender, String dob,
+        String Econtact, String Erelation, String BloodGroup, String token) {
+      context.read<UserDataModel>().updateName(name);
+      context.read<UserDataModel>().updatePhone(phone);
+      context.read<UserDataModel>().updateGender(gender);
+      context.read<UserDataModel>().updateDOB(dob);
+      context.read<UserDataModel>().updateEContact(Econtact);
+      context.read<UserDataModel>().updateERelation(Erelation);
+      context.read<UserDataModel>().updateBloodGroup(BloodGroup);
+      context.read<UserDataModel>().updateToken(token);
+    }
+
+>>>>>>> e6ed789 (Map Tap Location)
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -101,6 +116,7 @@ class _WelcomeState extends State<Welcome> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+<<<<<<< HEAD
                   onPressed: _loginButtonEnabled ? _onPressFunction : null,
                   style: ButtonStyle(
                     foregroundColor: _loginButtonEnabled
@@ -109,6 +125,43 @@ class _WelcomeState extends State<Welcome> {
                     backgroundColor: _loginButtonEnabled
                         ? MaterialStateProperty.all<Color>(Colors.white)
                         : MaterialStateProperty.all<Color>(Colors.grey),
+=======
+                  onPressed: () {
+                    String? token = UserPreferences.getToken();
+                    String? phone = UserPreferences.getPhone();
+                    IO.Socket socket = SocketManager.getSocket();
+                    if (token == null) {
+                      Navigator.of(context).push(_createPageRoute());
+                    } else {
+                      socket.emit(
+                          "verify_token", {'phone': phone, 'token': token});
+                    }
+                    socket.on("verify_token_result", (data) {
+                      if (data['status'] == "user_doesn't_exist" ||
+                          data['status'] == "wrong_token") {
+                        Navigator.of(context).push(_createPageRoute());
+                      } else if (data['status'] == 'details_not_filled') {
+                        Navigator.of(context).push(_createPageRouteDetails());
+                      } else if (data['status'] == 'details_filled') {
+                        updateDetails(
+                            data['name'] ?? "null",
+                            data["phone"] ?? "null",
+                            data['gender'] ?? "null",
+                            data['dob'] ?? "null",
+                            data['emergency_contact'] ?? "null",
+                            data['relation'] ?? "null",
+                            data['blood_group'] ?? "null",
+                            token!);
+                        Navigator.of(context).push(_createPageRouteInit());
+                      }
+                    });
+                  },
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.purple),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+>>>>>>> e6ed789 (Map Tap Location)
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(24.0),

@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
   List<Point> points = [];
   Timer? updateTimer;
   Position? pos;
+  LatLng? tappedLocation;
+  final mapController = MapController();
 
   @override
   void initState() {
@@ -351,12 +353,20 @@ class _HomePageState extends State<HomePage> {
       //     // "Lattitude: ${pos == null ? 0.0 : pos!.latitude}, Longitude: ${pos == null ? 0.0 : pos!.longitude}"),
       //     "Lattitude: ${context.watch<UserDataModel>().lattitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
       body: FlutterMap(
+        mapController: mapController,
         options: MapOptions(
           // initialCenter:
           // points.isNotEmpty ? points[0].coordinates! : const LatLng(0, 0),
           initialCenter: LatLng(context.read<UserDataModel>().latitude,
               context.read<UserDataModel>().longitude),
           initialZoom: 14,
+          onTap: (TapPosition tapPosition, LatLng latLng) {
+            // print(tapPosition);
+            // print(latLng);
+            setState(() {
+              tappedLocation = LatLng(latLng.latitude, latLng.longitude);
+            });
+          },
         ),
         children: [
           TileLayer(
@@ -368,13 +378,29 @@ class _HomePageState extends State<HomePage> {
               'id': 'mapbox.mapbox-streets-v8'
             },
           ),
-          const MarkerLayer(
+          MarkerLayer(
+            markers: [
+              if (tappedLocation != null)
+                Marker(
+                  width: 30.0,
+                  height: 30.0,
+                  point: tappedLocation!,
+                  child: const Icon(
+                    Icons.location_pin,
+                    color: Colors.red,
+                    size: 50.0,
+                  ),
+                ),
+            ],
+          ),
+          MarkerLayer(
             markers: [
               Marker(
                 width: 80.0,
                 height: 80.0,
-                point: LatLng(16.48784010549246, 80.69439348089172),
-                child: Icon(
+                point: LatLng(context.watch<UserDataModel>().lattitude,
+                    context.watch<UserDataModel>().longitude),
+                child: const Icon(
                   Icons.location_pin,
                   color: Colors.red,
                   size: 50.0,
