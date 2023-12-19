@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'location.dart';
 import 'package:path/path.dart' as p;
@@ -38,84 +39,82 @@ class _HomePageState extends State<HomePage> {
   //   super.dispose();
   // }
 
-  // Future<void> readLocationsFile() async {
-  //   try {
-  //     final String currentDir = Directory.current.path;
-  //     final String filePath = p.join(currentDir, 'location.dart');
+  Color generateHeatmapColor(double intensity) {
+    intensity = intensity.clamp(0.0, 1.0);
 
-  //     final File file = File(filePath);
-  //     final String contents = await file.readAsString();
-  //     final List<Map<dynamic, dynamic>> updatedLocations =
-  //         json.decode(contents);
+    double hue = (1.0 - intensity) * 60.0;
+    HSLColor hslColor = HSLColor.fromAHSL(1.0, hue, 1.0, 0.5);
 
-  //     print(updatedLocations);
+    return hslColor.toColor();
+  }
 
-  //     updatePoints(updatedLocations);
-  //   } catch (e) {
-  //     print('Error reading locations file: $e');
-  //   }
-  // }
+  double generateOpacity(double intensity) {
+    return intensity > 0.5 ? intensity * 0.5 : intensity;
+  }
 
-  // Color generateHeatmapColor(double intensity) {
-  //   intensity = intensity.clamp(0.0, 1.0);
+  bool isGood(String type) {
+    return type == 'relief' ||
+        type == 'hospital' ||
+        type == 'police' ||
+        type == 'firedept';
+  }
 
-  //   double hue = (1.0 - intensity) * 60.0;
-  //   HSLColor hslColor = HSLColor.fromAHSL(1.0, hue, 1.0, 0.5);
+  Icon generateIcon(String type) {
+    switch (type) {
+      case 'relief':
+        return const Icon(
+          Icons.house,
+          color: Colors.black,
+        );
+      case 'hospital':
+        return const Icon(
+          Icons.local_hospital,
+          color: Colors.black,
+        );
+      case 'police':
+        return const Icon(
+          Icons.local_police,
+          color: Colors.black,
+        );
+      case 'firedept':
+        return const Icon(
+          Icons.fire_truck,
+          color: Colors.black,
+        );
+      case 'accident':
+        return const Icon(
+          Icons.car_crash_sharp,
+          color: Colors.red,
+        );
+      case 'fire':
+        return const Icon(
+          Icons.fireplace,
+          color: Colors.red,
+        );
+      default:
+        return const Icon(
+          Icons.warning,
+          color: Colors.black,
+        );
+    }
+  }
 
-  //   return hslColor.toColor();
-  // }
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
 
-  // double generateOpacity(double intensity) {
-  //   return intensity > 0.5 ? intensity * 0.5 : intensity;
-  // }
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/location.txt');
+  }
 
-  // bool isGood(String type) {
-  //   return type == 'relief' ||
-  //       type == 'hospital' ||
-  //       type == 'police' ||
-  //       type == 'firedept';
-  // }
-
-  // Icon generateIcon(String type) {
-  //   switch (type) {
-  //     case 'relief':
-  //       return const Icon(
-  //         Icons.house,
-  //         color: Colors.black,
-  //       );
-  //     case 'hospital':
-  //       return const Icon(
-  //         Icons.local_hospital,
-  //         color: Colors.black,
-  //       );
-  //     case 'police':
-  //       return const Icon(
-  //         Icons.local_police,
-  //         color: Colors.black,
-  //       );
-  //     case 'firedept':
-  //       return const Icon(
-  //         Icons.fire_truck,
-  //         color: Colors.black,
-  //       );
-  //     case 'accident':
-  //       return const Icon(
-  //         Icons.car_crash_sharp,
-  //         color: Colors.red,
-  //       );
-  //     case 'fire':
-  //       return const Icon(
-  //         Icons.fireplace,
-  //         color: Colors.red,
-  //       );
-  //     default:
-  //       return const Icon(
-  //         Icons.warning,
-  //         color: Colors.black,
-  //       );
-  //   }
-  // }
-
+  Future<File> writeCounter(String counter) async {
+    final file = await _localFile;
+    // Write the file
+    // return file.writeAsBytes
+    return file.writeAsString('$counter');
+  }
   // void addPoint(Map<dynamic, dynamic> location, List<Point> listToUpdate) {
   //   Point newPoint = Point(
   //     name: location['name'],
