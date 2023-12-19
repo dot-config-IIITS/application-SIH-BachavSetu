@@ -214,56 +214,72 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.deepPurple.shade100,
-      body: Text(
-          // "Lattitude: ${pos == null ? 0.0 : pos!.latitude}, Longitude: ${pos == null ? 0.0 : pos!.longitude}"),
-          "Lattitude: ${context.watch<UserDataModel>().lattitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
-
-      //   body: FlutterMap(
-      //     options: MapOptions(
-      //       initialCenter:
-      //           points.isNotEmpty ? points[0].coordinates! : const LatLng(0, 0),
-      //       initialZoom: 14,
-      //     ),
-      //     children: [
-      //       TileLayer(
-      //         urlTemplate:
-      //             'https://api.mapbox.com/styles/v1/sahoobishwajeet/clq5bo7nn01zy01pacmmee3fn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
-      //         additionalOptions: const {
-      //           'accessToken':
-      //               'pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
-      //           'id': 'mapbox.mapbox-streets-v8'
-      //         },
-      //       ),
-      //       MarkerLayer(
-      //         markers: points
-      //             .map(
-      //               (point) => Marker(
-      //                 width: 30.0,
-      //                 height: 30.0,
-      //                 point: point.coordinates!,
-      //                 child: generateIcon(point.type!),
-      //                 rotate: true,
-      //               ),
-      //             )
-      //             .toList(),
-      //       ),
-      //       CircleLayer(
-      //         circles: points
-      //             .map(
-      //               (point) => CircleMarker(
-      //                 point: point.coordinates!,
-      //                 radius: point.radius!,
-      //                 useRadiusInMeter: true,
-      //                 color: isGood(point.type!)
-      //                     ? Colors.green.withOpacity(point.intensity!)
-      //                     : generateHeatmapColor(point.intensity!)
-      //                         .withOpacity(generateOpacity(point.intensity!)),
-      //               ),
-      //             )
-      //             .toList(),
-      //       ),
-      //     ],
-      //   ),
+      // body: Text(
+      // "Lattitude: ${pos == null ? 0.0 : pos!.latitude}, Longitude: ${pos == null ? 0.0 : pos!.longitude}"),
+      // "Lattitude: ${context.watch<UserDataModel>().lattitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
+      body: FlutterMap(
+        options: MapOptions(
+          // initialCenter:
+          // points.isNotEmpty ? points[0].coordinates! : const LatLng(0, 0),
+          initialCenter: LatLng(context.read<UserDataModel>().lattitude,
+              context.read<UserDataModel>().longitude),
+          initialZoom: 14,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate:
+                'https://api.mapbox.com/styles/v1/sahoobishwajeet/clq5bo7nn01zy01pacmmee3fn/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
+            additionalOptions: const {
+              'accessToken':
+                  'pk.eyJ1Ijoic2Fob29iaXNod2FqZWV0IiwiYSI6ImNscTR6Z3ppMTBjMXAyamxoMTJnbjQ1YzYifQ.x8UbjrT3ExtQ6lrbxZDM4w',
+              'id': 'mapbox.mapbox-streets-v8'
+            },
+          ),
+          const MarkerLayer(
+            markers: [
+              Marker(
+                width: 80.0,
+                height: 80.0,
+                point: LatLng(16.48784010549246, 80.69439348089172),
+                child: Icon(
+                  Icons.location_pin,
+                  color: Colors.red,
+                  size: 50.0,
+                ),
+                rotate: true,
+              ),
+            ],
+          ),
+          // MarkerLayer(
+          //   markers: points
+          //       .map(
+          //         (point) => Marker(
+          //           width: 30.0,
+          //           height: 30.0,
+          //           point: point.coordinates!,
+          //           child: generateIcon(point.type!),
+          //           rotate: true,
+          //         ),
+          //       )
+          //       .toList(),
+          // ),
+          // CircleLayer(
+          //   circles: points
+          //       .map(
+          //         (point) => CircleMarker(
+          //           point: point.coordinates!,
+          //           radius: point.radius!,
+          //           useRadiusInMeter: true,
+          //           color: isGood(point.type!)
+          //               ? Colors.green.withOpacity(point.intensity!)
+          //               : generateHeatmapColor(point.intensity!)
+          //                   .withOpacity(generateOpacity(point.intensity!)),
+          //         ),
+          //       )
+          //       .toList(),
+          // ),
+        ],
+      ),
     );
   }
 }
