@@ -16,7 +16,7 @@ class SocketManager {
   }
 
   static void _createSocket() {
-    _socket = IO.io('http://192.168.72.216:5000/client',
+    _socket = IO.io('http://192.168.72.160:5000/client',
         OptionBuilder().setTransports(['websocket']).build());
     _socket!.onConnect((data) => print("Connection Estabilished"));
     _socket!.onConnectError((data) => print('Connect error: $data'));

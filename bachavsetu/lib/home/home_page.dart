@@ -390,6 +390,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.red,
                     size: 50.0,
                   ),
+                  rotate: true,
                 ),
             ],
           ),
@@ -398,7 +399,7 @@ class _HomePageState extends State<HomePage> {
               Marker(
                 width: 80.0,
                 height: 80.0,
-                point: LatLng(context.watch<UserDataModel>().lattitude,
+                point: LatLng(context.watch<UserDataModel>().latitude,
                     context.watch<UserDataModel>().longitude),
                 child: const Icon(
                   Icons.location_pin,
