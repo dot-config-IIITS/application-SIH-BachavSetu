@@ -155,6 +155,61 @@ class _HomePageState extends State<HomePage> {
   //   });
   // }
 
+  Future<void> requestLocationPermission() async {
+    try {
+      var status = await Permission.location.status;
+      if (status.isGranted) {
+        return;
+      }
+
+      var result = await Permission.location.request();
+
+      if (result.isGranted) {
+        return;
+      } else if (result.isPermanentlyDenied) {
+        openAppSettings();
+      } else {
+        throw 'Location permission is denied.';
+      }
+    } catch (e) {
+      print('Error requesting location permission: $e');
+    }
+  }
+
+  Future<Position?> getUserLocation() async {
+    try {
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        throw 'Location services are disabled.';
+      }
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          throw 'Location permission is denied.';
+        }
+      }
+
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      print(position);
+      return position;
+    } catch (e) {
+      print('Error getting location: $e');
+      return null;
+    }
+  }
+
+  String userLocationGetter() {
+    requestLocationPermission().then((_) {
+      getUserLocation().then((position) {
+        return ("Lattitude:${position!.latitude}, Longitude:${position.longitude}");
+      });
+    });
+    return "NULL";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,7 +219,7 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.deepPurple.shade100,
-      body: const Text('Testing'),
+      body: Text(userLocationGetter()),
       //   body: FlutterMap(
       //     options: MapOptions(
       //       initialCenter:
