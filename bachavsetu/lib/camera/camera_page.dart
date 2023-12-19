@@ -5,8 +5,10 @@ import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:ffmpeg_kit_flutter/ffmpeg_kit.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -359,7 +361,13 @@ class _CameraPageState extends State<CameraPage> {
       print("killmepls");
     } else if (videoFile != null) {
       print('Video Path: ${videoFile!.path}');
-      List<int> bytes = await File(videoFile!.path).readAsBytes();
+      final inputFile = File(videoFile!.path);
+      final outputDir = await getTemporaryDirectory();
+      final outputFilePath = '${outputDir.path}/compressed_video.mp4';
+      await FFmpegKit.execute(
+        '-i ${inputFile.path} -vf scale=854:480 -c:a copy $outputFilePath',
+      );
+      List<int> bytes = await File(outputFilePath).readAsBytes();
       socket.emit("report_danger_site", {
         'file_data': bytes,
         'coordinates': [

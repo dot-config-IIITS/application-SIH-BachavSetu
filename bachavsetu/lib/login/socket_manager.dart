@@ -1,3 +1,4 @@
+import 'package:bachavsetu/utils/user_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -18,7 +19,17 @@ class SocketManager {
   static void _createSocket() {
     _socket = IO.io('http://192.168.72.216:5000/client',
         OptionBuilder().setTransports(['websocket']).build());
-    _socket!.onConnect((data) => print("Connection Estabilished"));
+    _socket!.onConnect((data) {
+      if (UserPreferences.getToken() != null) {
+        _socket?.emit("verify_token", {
+          'phone': UserPreferences.getPhone(),
+          'token': UserPreferences.getToken()
+        });
+      } else {
+        print("Warning: User has not generated a token yet!!");
+      }
+      print("Connection Estabilished");
+    });
     _socket!.onConnectError((data) => print('Connect error: $data'));
     _socket!.onDisconnect((data) {
       // _socket!.disconnect();

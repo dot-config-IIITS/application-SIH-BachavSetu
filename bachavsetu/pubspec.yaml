@@ -50,6 +50,7 @@ dependencies:
   geolocator: ^10.1.0
   path_provider: ^2.1.1
   permission_handler: ^11.1.0
+  ffmpeg_kit_flutter: ^6.0.3
   flutter_map:
 
 dev_dependencies:
