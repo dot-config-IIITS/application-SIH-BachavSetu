@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'location.dart';
 import 'package:path/path.dart' as p;
+import 'package:provider/provider.dart';
 
 import 'point.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -201,17 +203,19 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  String userLocationGetter() {
+  void userLocationGetter(BuildContext context) {
     requestLocationPermission().then((_) {
       getUserLocation().then((position) {
-        return ("Lattitude:${position!.latitude}, Longitude:${position.longitude}");
+        context
+            .read<UserDataModel>()
+            .updateLocation(position!.latitude, position.longitude);
       });
     });
-    return "NULL";
   }
 
   @override
   Widget build(BuildContext context) {
+    userLocationGetter(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
@@ -219,7 +223,8 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
       ),
       backgroundColor: Colors.deepPurple.shade100,
-      body: Text(userLocationGetter()),
+      body: Text(
+          "Lattitude: ${context.watch<UserDataModel>().lattitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
       //   body: FlutterMap(
       //     options: MapOptions(
       //       initialCenter:

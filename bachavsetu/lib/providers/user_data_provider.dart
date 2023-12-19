@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class UserDataModel extends ChangeNotifier {
@@ -10,10 +12,18 @@ class UserDataModel extends ChangeNotifier {
   String bloodGroup = "NULL";
   String token = "NULL";
   String phone = "0000000000";
+  double lattitude = 0.0;
+  double longitude = 0.0;
 
   // Method to update the data
   void updateName(String newData) {
     name = newData;
+    notifyListeners();
+  }
+
+  void updateLocation(double newLat, double newLong) {
+    lattitude = newLat;
+    longitude = newLong;
     notifyListeners();
   }
 
