@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserPreferences.init();
   // User cache is disabled.
-  UserPreferences.reset(); // comment this line to enable User caching (auto login and auto retreival of data from server).
+  // UserPreferences.reset(); // comment this line to enable User caching (auto login and auto retreival of data from server).
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => UserDataModel()),
