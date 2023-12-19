@@ -23,15 +23,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // List<Point> points = [];
-  // Timer? updateTimer;
+  Timer? updateTimer;
 
-  // @override
-  // void initState() {
-  // super.initState();
-  // startUpdateTimer();
-  // readLocationsFile();
-  // updatePoints(locations);
-  // }
+  @override
+  void initState() {
+    super.initState();
+    startUpdateTimer();
+    // readLocationsFile();
+    // updatePoints(locations);
+  }
 
   // @override
   // void dispose() {
@@ -138,23 +138,12 @@ class _HomePageState extends State<HomePage> {
   //   });
   // }
 
-  // void startUpdateTimer() {
-  //   updateTimer = Timer.periodic(const Duration(seconds: 20), (timer) {
-  //     // updatePoints(locations);
-  //   });
-  // }
-
-  // void updatePoints(List<Map<dynamic, dynamic>> updatedLocations) {
-  //   List<Point> newPoints = [];
-
-  //   for (var location in updatedLocations) {
-  //     addPoint(location, newPoints);
-  //   }
-
-  //   setState(() {
-  //     points = newPoints;
-  //   });
-  // }
+  void startUpdateTimer() {
+    updateTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      userLocationGetter();
+      // print("Timer");
+    });
+  }
 
   Future<void> requestLocationPermission() async {
     try {
@@ -202,19 +191,19 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void userLocationGetter(BuildContext context) {
-    requestLocationPermission().then((_) {
-      getUserLocation().then((position) {
-        context
-            .read<UserDataModel>()
-            .updateLocation(position!.latitude, position.longitude);
-      });
-    });
+  Future<Position?> userLocationGetter() async {
+    try {
+      await requestLocationPermission();
+      return await getUserLocation();
+    } catch (e) {
+      print('Error getting location: $e');
+      return null;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    userLocationGetter(context);
+    // userLocationGetter(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
