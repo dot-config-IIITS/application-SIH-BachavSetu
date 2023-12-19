@@ -91,8 +91,8 @@ class _AccountScreenState extends State<SettingsPage> {
               SettingItem(
                 title: "Emergency",
                 icon: Ionicons.call,
-                bgColor: Colors.deepPurple.shade100,
-                iconColor: Colors.deepPurple,
+                bgColor: Colors.red.shade100,
+                iconColor: Colors.red,
                 value: "English",
                 onTap: () {
                   Navigator.push(
@@ -107,8 +107,8 @@ class _AccountScreenState extends State<SettingsPage> {
               SettingItem(
                 title: "Mock Drills",
                 icon: Ionicons.analytics,
-                bgColor: Colors.deepPurple.shade100,
-                iconColor: Colors.deepPurple,
+                bgColor: Colors.red,
+                iconColor: Colors.white,
                 value: "English",
                 onTap: () {
                   Navigator.push(
@@ -147,8 +147,8 @@ class _AccountScreenState extends State<SettingsPage> {
               SettingItem(
                 title: "Contact Us!",
                 icon: Ionicons.mail,
-                bgColor: Colors.orange.shade100,
-                iconColor: Colors.orange,
+                bgColor: Colors.green,
+                iconColor: Colors.white,
                 value: "English",
                 onTap: () {
                   Navigator.push(
@@ -178,8 +178,8 @@ class _AccountScreenState extends State<SettingsPage> {
               SettingItem(
                 title: "FAQ",
                 icon: Ionicons.help_circle,
-                bgColor: Colors.blue.shade100,
-                iconColor: Colors.blue,
+                bgColor: Colors.black,
+                iconColor: Colors.white,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -193,8 +193,8 @@ class _AccountScreenState extends State<SettingsPage> {
               SettingItem(
                 title: "Privacy Policy",
                 icon: Ionicons.lock_closed,
-                bgColor: Colors.blue.shade100,
-                iconColor: Colors.blue,
+                bgColor: Colors.grey,
+                iconColor: Colors.yellow,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -208,8 +208,8 @@ class _AccountScreenState extends State<SettingsPage> {
               SettingItem(
                 title: "Terms of Service",
                 icon: Ionicons.document,
-                bgColor: Colors.blue.shade100,
-                iconColor: Colors.blue,
+                bgColor: Colors.purple,
+                iconColor: Colors.white,
                 onTap: () {
                   Navigator.push(
                     context,
