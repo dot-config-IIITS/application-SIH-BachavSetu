@@ -223,6 +223,14 @@ class _AccountScreenState extends State<SettingsPage> {
               SettingItem(
                 title: "Help",
                 icon: Ionicons.help_circle,
+                bgColor: Colors.green.shade100,
+                iconColor: Colors.green,
+                onTap: () {},
+              ),
+              const SizedBox(height: 20),
+              SettingItem(
+                title: "Log Out",
+                icon: Ionicons.log_out,
                 bgColor: Colors.red.shade100,
                 iconColor: Colors.red,
                 onTap: () {},
