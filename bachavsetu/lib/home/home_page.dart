@@ -24,6 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // List<Point> points = [];
   Timer? updateTimer;
+  Position? pos;
 
   @override
   void initState() {
@@ -140,7 +141,7 @@ class _HomePageState extends State<HomePage> {
 
   void startUpdateTimer() {
     updateTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      userLocationGetter();
+      pos = userLocationGetter();
       // print("Timer");
     });
   }
@@ -191,14 +192,15 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<Position?> userLocationGetter() async {
-    try {
-      await requestLocationPermission();
-      return await getUserLocation();
-    } catch (e) {
-      print('Error getting location: $e');
-      return null;
-    }
+  Position? userLocationGetter() {
+    requestLocationPermission().then((_) {
+      getUserLocation().then((position) {
+        // print(
+        // "Lattitude:${position!.latitude}, Longitude:${position.longitude}");
+        return position;
+      });
+    });
+    return null;
   }
 
   @override
@@ -212,7 +214,7 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.deepPurple.shade100,
       body: Text(
-          "Lattitude: ${context.watch<UserDataModel>().lattitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
+          "Lattitude: ${pos == null ? 0.0 : pos!.latitude}, Longitude: ${pos == null ? 0.0 : pos!.longitude}"),
       //   body: FlutterMap(
       //     options: MapOptions(
       //       initialCenter:
