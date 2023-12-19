@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    startUpdateTimer();
+    // startUpdateTimer();
     // readLocationsFile();
     // updatePoints(locations);
   }
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
 
   void startUpdateTimer() {
     updateTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
-      pos = userLocationGetter();
+      // pos = userLocationGetter();
       // print("Timer");
     });
   }
@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<Position?> getUserLocation() async {
+  void getUserLocation(BuildContext context) async {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
@@ -183,29 +183,30 @@ class _HomePageState extends State<HomePage> {
 
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
+        forceAndroidLocationManager: true,
       );
       print(position);
-      return position;
+      context
+          .read<UserDataModel>()
+          .updateLocation(position.latitude, position.longitude);
     } catch (e) {
       print('Error getting location: $e');
-      return null;
     }
   }
 
-  Position? userLocationGetter() {
-    requestLocationPermission().then((_) {
-      getUserLocation().then((position) {
-        // print(
-        // "Lattitude:${position!.latitude}, Longitude:${position.longitude}");
-        return position;
-      });
-    });
-    return null;
-  }
+  // Position? userLocationGetter() {
+  //   requestLocationPermission().then((_) {
+  //     getUserLocation();
+  //   });
+  //   return null;
+  // }
 
   @override
   Widget build(BuildContext context) {
     // userLocationGetter(context);
+    requestLocationPermission().then((_) {
+      getUserLocation(context);
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
@@ -214,7 +215,9 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.deepPurple.shade100,
       body: Text(
-          "Lattitude: ${pos == null ? 0.0 : pos!.latitude}, Longitude: ${pos == null ? 0.0 : pos!.longitude}"),
+          // "Lattitude: ${pos == null ? 0.0 : pos!.latitude}, Longitude: ${pos == null ? 0.0 : pos!.longitude}"),
+          "Lattitude: ${context.watch<UserDataModel>().lattitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
+
       //   body: FlutterMap(
       //     options: MapOptions(
       //       initialCenter:
