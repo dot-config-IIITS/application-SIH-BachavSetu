@@ -1,3 +1,5 @@
+import 'package:bachavsetu/login/welcome.dart';
+import 'package:bachavsetu/utils/user_preferences.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
 
@@ -233,7 +235,15 @@ class _AccountScreenState extends State<SettingsPage> {
                 icon: Ionicons.log_out,
                 bgColor: Colors.red.shade100,
                 iconColor: Colors.red,
-                onTap: () {},
+                onTap: () {
+                  UserPreferences.reset();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Welcome(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 70),
             ],

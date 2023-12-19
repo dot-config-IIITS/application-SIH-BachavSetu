@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:bachavsetu/login/socket_manager.dart';
+import 'package:bachavsetu/providers/user_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key}) : super(key: key);
@@ -81,75 +85,6 @@ class _CameraPageState extends State<CameraPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     ElevatedButton(
-              //       onPressed: () {
-              //         _pickImage();
-              //       },
-              //       child: const Icon(Icons.photo),
-              //     ),
-              //     ElevatedButton(
-              //       onPressed: () {
-              //         _captureImage();
-              //       },
-              //       child: const Icon(Icons.camera),
-              //     ),
-              //     ElevatedButton(
-              //       onPressed: () {
-              //         _pickVideo();
-              //       },
-              //       child: const Icon(Icons.video_library),
-              //     ),
-              //     ElevatedButton(
-              //       onPressed: () {
-              //         _recordVideo();
-              //       },
-              //       child: const Icon(Icons.videocam),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 15),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     Container(
-              //       width: 150,
-              //       height: 150,
-              //       decoration: BoxDecoration(
-              //         border: Border.all(color: Colors.grey),
-              //         borderRadius: BorderRadius.circular(10),
-              //       ),
-              //       child: Center(
-              //         child: imageFile == null
-              //             ? const Text('No image selected')
-              //             : Image.file(
-              //                 File(imageFile!.path),
-              //                 height: 150,
-              //                 width: 150,
-              //               ),
-              //       ),
-              //     ),
-              //     Container(
-              //       width: 150,
-              //       height: 150,
-              //       decoration: BoxDecoration(
-              //         border: Border.all(color: Colors.grey),
-              //         borderRadius: BorderRadius.circular(10),
-              //       ),
-              //       child: Center(
-              //         child: videoFile == null
-              //             ? const Text('No video selected')
-              //             : Image.file(
-              //                 File(videoFile!.path),
-              //                 height: 150,
-              //                 width: 150,
-              //               ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -211,7 +146,13 @@ class _CameraPageState extends State<CameraPage> {
                       child: DropdownButton<String>(
                         underline: Container(),
                         value: selectedDisasterOption,
-                        onChanged: _onDropdownChanged,
+                        onChanged: (newValue) {
+                          if (newValue != null) {
+                            setState(() {
+                              selectedDisasterOption = newValue;
+                            });
+                          }
+                        },
                         items: disasterOption.map((option) {
                           return DropdownMenuItem<String>(
                             value: option,
@@ -336,7 +277,7 @@ class _CameraPageState extends State<CameraPage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _submit();
+                  _submit(context);
                 },
                 child: const Text('Submit'),
               ),
@@ -394,21 +335,74 @@ class _CameraPageState extends State<CameraPage> {
     }
   }
 
-  void _submit() {
+  void _submit(BuildContext context) async {
     print('Note: ${noteTextController.text}');
     print('Selected Disaster Type: $selectedDisasterOption');
+    IO.Socket socket = SocketManager.getSocket();
     if (imageFile != null) {
       print('Image Path: ${imageFile!.path}');
-    }
-    if (videoFile != null) {
+      List<int> bytes = await File(imageFile!.path).readAsBytes();
+      print("killmepls");
+      socket.emit("ur_mom", {'IDK': 'anymore'});
+      socket.emit("report_danger_site", {
+        'file_data': bytes,
+        'coordinates': [
+          context.read<UserDataModel>().latitude,
+          context.read<UserDataModel>().longitude
+        ],
+        'type': selectedDisasterOption,
+        'state': selectedStateName,
+        'district': selectedDistrict,
+        'extension': '.jpg',
+        'text': noteTextController.text,
+      });
+      print("killmepls");
+    } else if (videoFile != null) {
       print('Video Path: ${videoFile!.path}');
+      List<int> bytes = await File(videoFile!.path).readAsBytes();
+      socket.emit("report_danger_site", {
+        'file_data': bytes,
+        'coordinates': [
+          context.read<UserDataModel>().latitude,
+          context.read<UserDataModel>().longitude
+        ],
+        'type': selectedDisasterOption,
+        'state': selectedStateName,
+        'district': selectedDistrict,
+        'extension': '.mp4',
+        'text': noteTextController.text,
+      });
+    } else {
+      showPopup(context);
     }
 
     setState(() {
       imageFile = null;
       videoFile = null;
       noteTextController.clear();
-      selectedDisasterOption = 'Option1';
+      selectedDisasterOption = 'Road Accident';
     });
+    socket.on("report_danger_site_result", (data) => print(data));
+  }
+
+  void showPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("No image or video file."),
+          content: const Text(
+              "Please select a valid image or video file before submitting."),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

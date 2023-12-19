@@ -12,7 +12,7 @@ class UserDataModel extends ChangeNotifier {
   String bloodGroup = "NULL";
   String token = "NULL";
   String phone = "0000000000";
-  double lattitude = 0.0;
+  double latitude = 0.0;
   double longitude = 0.0;
 
   // Method to update the data
@@ -22,7 +22,7 @@ class UserDataModel extends ChangeNotifier {
   }
 
   void updateLocation(double newLat, double newLong) {
-    lattitude = newLat;
+    latitude = newLat;
     longitude = newLong;
     notifyListeners();
   }

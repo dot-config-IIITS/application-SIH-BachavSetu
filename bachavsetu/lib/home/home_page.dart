@@ -216,7 +216,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.deepPurple.shade100,
       body: Text(
           // "Lattitude: ${pos == null ? 0.0 : pos!.latitude}, Longitude: ${pos == null ? 0.0 : pos!.longitude}"),
-          "Lattitude: ${context.watch<UserDataModel>().lattitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
+          "Lattitude: ${context.watch<UserDataModel>().latitude}, Longitude: ${context.watch<UserDataModel>().longitude}"),
 
       //   body: FlutterMap(
       //     options: MapOptions(

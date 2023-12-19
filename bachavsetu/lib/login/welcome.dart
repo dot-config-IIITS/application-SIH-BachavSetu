@@ -13,16 +13,21 @@ class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
 
   @override
-  _WelcomeState createState() => _WelcomeState();
+  _WelcomeState createState() => _WelcomeState(enabled: true);
 }
 
 class _WelcomeState extends State<Welcome> {
   bool _loginButtonEnabled = true;
 
+  _WelcomeState({required bool enabled}) {
+    _loginButtonEnabled = enabled;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xfff7f6fb),
         elevation: 0,
         // <========================Back Doors (To be Removed)======================>
@@ -33,7 +38,7 @@ class _WelcomeState extends State<Welcome> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => InitPage()),
               );
@@ -45,7 +50,7 @@ class _WelcomeState extends State<Welcome> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => FormPage()),
               );
@@ -252,7 +257,7 @@ class _WelcomeState extends State<Welcome> {
             data['relation'] ?? "null",
             data['blood_group'] ?? "null",
             token!);
-        Navigator.of(context).push(_createPageRouteInit());
+        Navigator.of(context).pushReplacement(_createPageRouteInit());
       }
     });
 
