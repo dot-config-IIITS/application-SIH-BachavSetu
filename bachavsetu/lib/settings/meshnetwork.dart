@@ -178,7 +178,7 @@ class __meshNetworkState extends State<_meshNetwork>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter p2p connection plugin'),
+        title: const Text('Connect Offline (Mesh Netwrork)'),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

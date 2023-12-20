@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:bachavsetu/login/socket_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class FeedbackForm extends StatefulWidget {
   const FeedbackForm({Key? key}) : super(key: key);
@@ -109,7 +112,12 @@ class _FeedbackFormState extends State<FeedbackForm> {
             ElevatedButton(
               onPressed: () {
                 // FEEDBACK LOGIC TO BE IMPLEMENTED
-
+                IO.Socket socket = SocketManager.getSocket();
+                socket.emit("feedback", {
+                  'state': selectedStateName,
+                  'district': selectedDistrict,
+                  'feedback': feedback,
+                });
                 print(
                     'State: $selectedStateName, District: $selectedDistrict, Feedback: $feedback');
               },
