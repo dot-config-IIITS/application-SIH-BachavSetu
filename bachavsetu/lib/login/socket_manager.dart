@@ -32,8 +32,8 @@ class SocketManager {
     });
     _socket!.onConnectError((data) => print('Connect error: $data'));
     _socket!.onDisconnect((data) {
-      // _socket!.disconnect();
-      print("Socket IO server wants to disconnect");
+      _socket!.disconnect();
+      print("Socket IO server has disconnected!");
     });
   }
 
