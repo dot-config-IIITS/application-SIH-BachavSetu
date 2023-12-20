@@ -1,4 +1,5 @@
 import 'package:bachavsetu/login/welcome.dart';
+import 'package:bachavsetu/settings/meshnetwork.dart';
 import 'package:bachavsetu/utils/user_preferences.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
@@ -133,6 +134,21 @@ class _AccountScreenState extends State<SettingsPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ArticleHomePage(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              SettingItem(
+                title: "Mesh Networking",
+                icon: Ionicons.globe_outline,
+                bgColor: Colors.purple,
+                iconColor: Colors.white,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MeshNetwork(),
                     ),
                   );
                 },

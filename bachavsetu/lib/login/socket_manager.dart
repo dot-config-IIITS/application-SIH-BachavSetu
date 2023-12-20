@@ -17,7 +17,7 @@ class SocketManager {
   }
 
   static void _createSocket() {
-    _socket = IO.io('http://192.168.72.160:5000/client',
+    _socket = IO.io('http://10.1.7.106:5000/client',
         OptionBuilder().setTransports(['websocket']).build());
     _socket!.onConnect((data) {
       if (UserPreferences.getToken() != null) {
