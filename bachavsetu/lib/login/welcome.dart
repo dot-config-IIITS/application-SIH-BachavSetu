@@ -118,7 +118,7 @@ class _WelcomeState extends State<Welcome> {
                   child: const Padding(
                     padding: EdgeInsets.all(14.0),
                     child: Text(
-                      "Login",
+                      "ఐ డోంట్ వాన్నా లివ్ ఎనీ మోర్ అని తెలుగులో రాశారు",
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
