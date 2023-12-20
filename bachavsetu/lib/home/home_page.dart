@@ -365,7 +365,7 @@ class _HomePageState extends State<HomePage> {
     });
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Map Page'),
         backgroundColor: Colors.deepPurple.shade50,
         automaticallyImplyLeading: false,
       ),

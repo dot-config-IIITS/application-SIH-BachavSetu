@@ -1,5 +1,7 @@
 import 'package:bachavsetu/login/welcome.dart';
+import 'package:bachavsetu/settings/feedback/history.dart';
 import 'package:bachavsetu/settings/meshnetwork.dart';
+import 'package:bachavsetu/settings/other/help.dart';
 import 'package:bachavsetu/utils/user_preferences.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +93,14 @@ class _AccountScreenState extends State<SettingsPage> {
                 ),
               ),
               const SizedBox(height: 40),
+              const Text(
+                "Emergency",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 30),
               SettingItem(
                 title: "Emergency",
                 icon: Ionicons.call,
@@ -102,6 +112,21 @@ class _AccountScreenState extends State<SettingsPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => Emergency(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              SettingItem(
+                title: "Mesh Networking",
+                icon: Ionicons.globe_outline,
+                bgColor: Colors.purple,
+                iconColor: Colors.white,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MeshNetwork(),
                     ),
                   );
                 },
@@ -134,21 +159,6 @@ class _AccountScreenState extends State<SettingsPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => ArticleHomePage(),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
-              SettingItem(
-                title: "Mesh Networking",
-                icon: Ionicons.globe_outline,
-                bgColor: Colors.purple,
-                iconColor: Colors.white,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MeshNetwork(),
                     ),
                   );
                 },
@@ -188,6 +198,21 @@ class _AccountScreenState extends State<SettingsPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const FeedbackForm(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              SettingItem(
+                title: "Feedback History",
+                icon: Ionicons.time,
+                bgColor: Colors.orange.shade100,
+                iconColor: Colors.orange,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FeedbackHistory(),
                     ),
                   );
                 },
@@ -243,7 +268,14 @@ class _AccountScreenState extends State<SettingsPage> {
                 icon: Ionicons.help_circle,
                 bgColor: Colors.green.shade100,
                 iconColor: Colors.green,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HelpPage(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(
