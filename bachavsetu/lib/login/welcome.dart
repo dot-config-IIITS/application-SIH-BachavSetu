@@ -44,18 +44,18 @@ class _WelcomeState extends State<Welcome> {
               );
             },
           ),
-          IconButton(
-            icon: const Icon(
-              Icons.skip_next,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => FormPage()),
-              );
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(
+          //     Icons.skip_next,
+          //     color: Colors.black,
+          //   ),
+          //   onPressed: () {
+          //     Navigator.pushReplacement(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => FormPage()),
+          //     );
+          //   },
+          // ),
         ],
         // <========================Back Doors (To be Removed)======================>
       ),
