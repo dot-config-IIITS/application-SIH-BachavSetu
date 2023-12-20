@@ -6,25 +6,25 @@ import 'dart:async';
 
 import 'package:flutter_p2p_connection/flutter_p2p_connection.dart';
 
-class MeshNetwork extends StatelessWidget {
+// class MeshNetwork extends StatelessWidget {
+//   const MeshNetwork({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: MeshNetwork(),
+//     );
+//   }
+// }
+
+class MeshNetwork extends StatefulWidget {
   const MeshNetwork({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: _meshNetwork(),
-    );
-  }
+  State<MeshNetwork> createState() => __meshNetworkState();
 }
 
-class _meshNetwork extends StatefulWidget {
-  const _meshNetwork({super.key});
-
-  @override
-  State<_meshNetwork> createState() => __meshNetworkState();
-}
-
-class __meshNetworkState extends State<_meshNetwork>
+class __meshNetworkState extends State<MeshNetwork>
     with WidgetsBindingObserver {
   final TextEditingController msgText = TextEditingController();
   final _flutterP2pConnectionPlugin = FlutterP2pConnection();
@@ -70,6 +70,7 @@ class __meshNetworkState extends State<_meshNetwork>
         peers = event;
       });
     });
+    await _flutterP2pConnectionPlugin.askLocationPermission();
   }
 
   Future startSocket() async {
@@ -269,61 +270,68 @@ class __meshNetworkState extends State<_meshNetwork>
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                snack((await _flutterP2pConnectionPlugin.checkLocationEnabled())
-                    ? "enabled"
-                    : "diabled");
-              },
-              child: const Text("check location enabled"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // ElevatedButton(
+                //   onPressed: () async {
+                //     snack((await _flutterP2pConnectionPlugin
+                //             .checkLocationEnabled())
+                //         ? "enabled"
+                //         : "disabled");
+                //   },
+                //   child: const Text("Location Enabled?"),
+                // ),
+                // ElevatedButton(
+                //   onPressed: () async {
+                //     print(await _flutterP2pConnectionPlugin
+                //         .askLocationPermission());
+                //   },
+                //   child: const Text("Location Permission"),
+                // ),
+                ElevatedButton(
+                  onPressed: () async {
+                    print(await _flutterP2pConnectionPlugin
+                        .enableLocationServices());
+                  },
+                  child: const Text("Enable Location"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    print(
+                        await _flutterP2pConnectionPlugin.enableWifiServices());
+                  },
+                  child: const Text("Enable Wifi"),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () async {
-                snack((await _flutterP2pConnectionPlugin.checkWifiEnabled())
-                    ? "enabled"
-                    : "diabled");
-              },
-              child: const Text("check wifi enabled"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                print(
-                    await _flutterP2pConnectionPlugin.askLocationPermission());
-              },
-              child: const Text("ask location permission"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                print(await _flutterP2pConnectionPlugin.askStoragePermission());
-              },
-              child: const Text("ask storage permission"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                print(
-                    await _flutterP2pConnectionPlugin.enableLocationServices());
-              },
-              child: const Text("enable location"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                print(await _flutterP2pConnectionPlugin.enableWifiServices());
-              },
-              child: const Text("enable wifi"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                bool? created = await _flutterP2pConnectionPlugin.createGroup();
-                snack("created group: $created");
-              },
-              child: const Text("create group"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                bool? removed = await _flutterP2pConnectionPlugin.removeGroup();
-                snack("removed group: $removed");
-              },
-              child: const Text("remove group/disconnect"),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     print(await _flutterP2pConnectionPlugin.askStoragePermission());
+            //   },
+            //   child: const Text("Storage Permission"),
+            // ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    bool? created =
+                        await _flutterP2pConnectionPlugin.createGroup();
+                    snack("created group: $created");
+                  },
+                  child: const Text("Create Group"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    bool? removed =
+                        await _flutterP2pConnectionPlugin.removeGroup();
+                    snack("removed group: $removed");
+                  },
+                  child: const Text("Remove Group"),
+                ),
+              ],
             ),
             ElevatedButton(
               onPressed: () async {
@@ -354,73 +362,85 @@ class __meshNetworkState extends State<_meshNetwork>
                   ),
                 );
               },
-              child: const Text("get group info"),
+              child: const Text("Get Group Info"),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                String? ip = await _flutterP2pConnectionPlugin.getIPAddress();
-                snack("ip: $ip");
-              },
-              child: const Text("get ip"),
+            const SizedBox(height: 20),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     String? ip = await _flutterP2pConnectionPlugin.getIPAddress();
+            //     snack("IP: $ip");
+            //   },
+            //   child: const Text("Get IP Address"),
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    bool? discovering =
+                        await _flutterP2pConnectionPlugin.discover();
+                    snack("Discovering $discovering");
+                  },
+                  child: const Text("Discover Nearby Devices"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    bool? stopped =
+                        await _flutterP2pConnectionPlugin.stopDiscovery();
+                    snack("stopped discovering $stopped");
+                  },
+                  child: const Text("Stop Discovery"),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () async {
-                bool? discovering =
-                    await _flutterP2pConnectionPlugin.discover();
-                snack("discovering $discovering");
-              },
-              child: const Text("discover"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                bool? stopped =
-                    await _flutterP2pConnectionPlugin.stopDiscovery();
-                snack("stopped discovering $stopped");
-              },
-              child: const Text("stop discovery"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                startSocket();
-              },
-              child: const Text("open a socket"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                connectToSocket();
-              },
-              child: const Text("connect to socket"),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    startSocket();
+                  },
+                  child: const Text("Open A Socket"),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    connectToSocket();
+                  },
+                  child: const Text("Connect To Socket"),
+                ),
+              ],
             ),
             ElevatedButton(
               onPressed: () async {
                 closeSocketConnection();
               },
-              child: const Text("close socket"),
+              child: const Text("Close Socket"),
             ),
             TextField(
               controller: msgText,
               decoration: const InputDecoration(
-                hintText: "message",
+                hintText: "Type Your Message",
               ),
             ),
             ElevatedButton(
               onPressed: () async {
                 sendMessage();
               },
-              child: const Text("send msg"),
+              child: const Text("Send Message"),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                sendFile(true);
-              },
-              child: const Text("send File from phone"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                sendFile(false);
-              },
-              child: const Text("send File"),
-            ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     sendFile(true);
+            //   },
+            //   child: const Text("Send File From Phone"),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     sendFile(false);
+            //   },
+            //   child: const Text("Send File"),
+            // ),
           ],
         ),
       ),

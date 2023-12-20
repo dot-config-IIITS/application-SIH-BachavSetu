@@ -59,39 +59,67 @@ class _FeedbackFormState extends State<FeedbackForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DropdownButtonFormField<String>(
-              decoration: const InputDecoration(labelText: 'Select State'),
-              value: selectedStateName,
-              items: stateNames.map((stateName) {
-                return DropdownMenuItem<String>(
-                  value: stateName,
-                  child: Text(stateName),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selectedStateName = value!;
-                  selectedDistrict =
-                      districts[value]!.isNotEmpty ? districts[value]![0] : '';
-                });
-              },
+            // Flexible
+            // (child:DropdownButtonFormField<String>(
+            //   decoration: const InputDecoration(labelText: 'Select State'),
+            //   value: selectedStateName,
+            //   items: stateNames.map((stateName) {
+            //     return DropdownMenuItem<String>(
+            //       value: stateName,
+            //       child: Text(stateName),
+            //     );
+            //   }).toList(),
+            //   onChanged: (value) {
+            //     setState(() {
+            //       selectedStateName = value!;
+            //       selectedDistrict =
+            //           districts[value]!.isNotEmpty ? districts[value]![0] : '';
+            //     });
+            //   },
+            // ),)
+            Flexible(
+              child: DropdownButton<String>(
+                underline: Container(),
+                isExpanded: true,
+                value: selectedStateName,
+                onChanged: (value) {
+                  setState(() {
+                    selectedStateName = value!;
+                    selectedDistrict = districts[value]!.isNotEmpty
+                        ? districts[value]![0]
+                        : '';
+                  });
+                },
+                items: stateNames.map((option) {
+                  return DropdownMenuItem<String>(
+                    value: option,
+                    child: Text(
+                      option,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                }).toList(),
+              ),
             ),
             const SizedBox(height: 16.0),
-            DropdownButtonFormField<String>(
-              decoration: const InputDecoration(labelText: 'Select District'),
-              value: selectedDistrict,
-              items: districts[selectedStateName]?.map((district) {
-                    return DropdownMenuItem<String>(
-                      value: district,
-                      child: Text(district),
-                    );
-                  }).toList() ??
-                  [],
-              onChanged: (value) {
-                setState(() {
-                  selectedDistrict = value!;
-                });
-              },
+            Flexible(
+              child: DropdownButton<String>(
+                underline: Container(),
+                isExpanded: true,
+                value: selectedDistrict,
+                onChanged: (value) {
+                  setState(() {
+                    selectedDistrict = value!;
+                  });
+                },
+                items: districts[selectedStateName]?.map((district) {
+                      return DropdownMenuItem<String>(
+                        value: district,
+                        child: Text(district),
+                      );
+                    }).toList() ??
+                    [],
+              ),
             ),
             const SizedBox(height: 16.0),
             TextFormField(
@@ -111,13 +139,13 @@ class _FeedbackFormState extends State<FeedbackForm> {
             const SizedBox(height: 32.0),
             ElevatedButton(
               onPressed: () {
-                // FEEDBACK LOGIC TO BE IMPLEMENTED
                 IO.Socket socket = SocketManager.getSocket();
                 socket.emit("feedback", {
                   'state': selectedStateName,
                   'district': selectedDistrict,
                   'feedback': feedback,
                 });
+                showSubmittedPopup(context);
                 print(
                     'State: $selectedStateName, District: $selectedDistrict, Feedback: $feedback');
               },
@@ -126,6 +154,27 @@ class _FeedbackFormState extends State<FeedbackForm> {
           ],
         ),
       ),
+    );
+  }
+
+  void showSubmittedPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Thank you for sending a feedback."),
+          content: const Text(
+              "We will try to resolve the issue as soon as possible and make our app better."),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

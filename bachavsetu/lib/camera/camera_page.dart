@@ -80,7 +80,7 @@ class _CameraPageState extends State<CameraPage> {
         backgroundColor: Colors.deepPurple.shade50,
         automaticallyImplyLeading: false,
       ),
-      backgroundColor: Colors.deepPurple.shade100,
+      // backgroundColor: Colors.deepPurple.shade100,
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -134,7 +134,7 @@ class _CameraPageState extends State<CameraPage> {
                 height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -172,7 +172,7 @@ class _CameraPageState extends State<CameraPage> {
                 height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -218,7 +218,7 @@ class _CameraPageState extends State<CameraPage> {
                 height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -260,7 +260,7 @@ class _CameraPageState extends State<CameraPage> {
                 height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Colors.grey[100],
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
