@@ -9,6 +9,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'location.dart';
 import 'package:path/path.dart' as p;
 import 'package:provider/provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:bachavsetu/login/socket_manager.dart';
 
 import 'point.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -126,17 +128,15 @@ class _HomePageState extends State<HomePage> {
 
     Map<String, dynamic> locations = {
       "loc1": {
-        "name": "PVPSIT",
         "coordinates": {
           "latitude": 16.48784010549246,
           "longitude": 80.69439348089172
         },
         "type": "relief",
         "intensity": 0.2,
-        "radius": 250.0
+        "radius": 200.0
       },
       "loc2": {
-        "name": "Kanuru",
         "coordinates": {
           "latitude": 16.500015724527493,
           "longitude": 80.69160408652115
@@ -146,7 +146,6 @@ class _HomePageState extends State<HomePage> {
         "radius": 200.0
       },
       "loc3": {
-        "name": "Sitapuram Colony",
         "coordinates": {
           "latitude": 16.475786057744276,
           "longitude": 80.7094013279649
@@ -156,37 +155,33 @@ class _HomePageState extends State<HomePage> {
         "radius": 400.0
       },
       "loc4": {
-        "name": "SRN Police",
         "coordinates": {
           "latitude": 16.511850797545755,
           "longitude": 80.69144235326961
         },
         "type": "police",
         "intensity": 0.3,
-        "radius": 250.0
+        "radius": 200.0
       },
       "loc5": {
-        "name": "Kamineni Hospital",
         "coordinates": {
           "latitude": 16.497043743566362,
           "longitude": 80.70273631514088
         },
         "type": "hospital",
         "intensity": 0.3,
-        "radius": 250.0
+        "radius": 200.0
       },
       "loc6": {
-        "name": "SRN Fire Station",
         "coordinates": {
           "latitude": 16.50742086453858,
           "longitude": 80.70579151012141
         },
         "type": "firedept",
         "intensity": 0.3,
-        "radius": 250.0
+        "radius": 200.0
       },
       "loc7": {
-        "name": "Ashok Nagar",
         "coordinates": {
           "latitude": 16.485043597365173,
           "longitude": 80.68283138971192
@@ -212,6 +207,11 @@ class _HomePageState extends State<HomePage> {
 
     await file.writeAsString(json.encode(locations));
     // await file.writeAsString(json.encode(esit));
+
+    IO.Socket socket = SocketManager.getSocket();
+    socket.on("notify_danger_site", (data) async {
+      await file.writeAsString(json.encode(data));
+    });
   }
 
   void readJsonFileAndConvertToPoints() async {
@@ -224,7 +224,6 @@ class _HomePageState extends State<HomePage> {
 
       jsonData.forEach((key, location) {
         Point newPoint = Point(
-          name: location['name'],
           coordinates: LatLng(
             location['coordinates']['latitude'],
             location['coordinates']['longitude'],

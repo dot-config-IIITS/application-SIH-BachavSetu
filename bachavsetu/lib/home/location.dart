@@ -1,33 +1,24 @@
 List<Map> locations = [
   {
-    'name': 'PVPSIT',
     'coordinates': {
       'latitude': 16.48784010549246,
       'longitude': 80.69439348089172,
     },
     'type': 'relief',
-    'intensity': 0.2,
-    'radius': 250.0,
   },
   {
-    'name': 'Kanuru',
     'coordinates': {
       'latitude': 16.500015724527493,
       'longitude': 80.69160408652115,
     },
     'type': 'accident',
-    'intensity': 0.2,
-    'radius': 200.0,
   },
   {
-    'name': 'Sitapuram Colony',
     'coordinates': {
       'latitude': 16.475786057744276,
       'longitude': 80.7094013279649,
     },
     'type': 'flood',
-    'intensity': 0.8,
-    'radius': 400.0,
   },
   {
     'name': 'SRN Police',

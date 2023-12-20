@@ -1,14 +1,4 @@
 {
-  "loc1" : {
-    "name": "PVPSIT",
-    "coordinates": {
-      "latitude": 16.48784010549246,
-      "longitude": 80.69439348089172
-    },
-    "type": "relief",
-    "intensity": 0.2,
-    "radius": 250.0
-  },
   "loc2" : {
     "name": "Kanuru",
     "coordinates": {

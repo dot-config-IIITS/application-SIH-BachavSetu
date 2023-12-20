@@ -345,7 +345,6 @@ class _CameraPageState extends State<CameraPage> {
       showSubmittedPopup(context);
       print('Image Path: ${imageFile!.path}');
       List<int> bytes = await File(imageFile!.path).readAsBytes();
-      socket.emit("ur_mom", {'IDK': 'anymore'});
       socket.emit("report_danger_site", {
         'file_data': bytes,
         'coordinates': [
