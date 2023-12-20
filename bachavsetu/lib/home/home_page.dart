@@ -70,36 +70,43 @@ class _HomePageState extends State<HomePage> {
         return const Icon(
           Icons.house,
           color: Colors.black,
+          size: 30.0,
         );
       case 'hospital':
         return const Icon(
           Icons.local_hospital,
           color: Colors.black,
+          size: 30.0,
         );
       case 'police':
         return const Icon(
           Icons.local_police,
           color: Colors.black,
+          size: 30.0,
         );
       case 'firedept':
         return const Icon(
           Icons.fire_truck,
           color: Colors.black,
+          size: 30.0,
         );
       case 'accident':
         return const Icon(
           Icons.car_crash_sharp,
           color: Colors.red,
+          size: 30.0,
         );
       case 'fire':
         return const Icon(
           Icons.fireplace,
           color: Colors.red,
+          size: 30.0,
         );
       default:
         return const Icon(
           Icons.warning,
           color: Colors.black,
+          size: 30.0,
         );
     }
   }
@@ -190,7 +197,21 @@ class _HomePageState extends State<HomePage> {
       }
     };
 
+    Map<String, dynamic> esit = {
+      "Test": {
+        "name": "Test Loc",
+        "coordinates": {
+          "latitude": 16.485043597365173,
+          "longitude": 80.68283138971192
+        },
+        "type": "firedept",
+        "intensity": 0.3,
+        "radius": 800.0
+      }
+    };
+
     await file.writeAsString(json.encode(locations));
+    // await file.writeAsString(json.encode(esit));
   }
 
   void readJsonFileAndConvertToPoints() async {

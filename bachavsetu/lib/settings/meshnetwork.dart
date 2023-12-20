@@ -319,7 +319,7 @@ class __meshNetworkState extends State<MeshNetwork>
                   onPressed: () async {
                     bool? created =
                         await _flutterP2pConnectionPlugin.createGroup();
-                    snack("created group: $created");
+                    snack("Created Group: $created");
                   },
                   child: const Text("Create Group"),
                 ),
@@ -387,7 +387,7 @@ class __meshNetworkState extends State<MeshNetwork>
                   onPressed: () async {
                     bool? stopped =
                         await _flutterP2pConnectionPlugin.stopDiscovery();
-                    snack("stopped discovering $stopped");
+                    snack("Stopped Discovering $stopped");
                   },
                   child: const Text("Stop Discovery"),
                 ),
