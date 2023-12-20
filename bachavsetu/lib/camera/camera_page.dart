@@ -342,6 +342,7 @@ class _CameraPageState extends State<CameraPage> {
     print('Selected Disaster Type: $selectedDisasterOption');
     IO.Socket socket = SocketManager.getSocket();
     if (imageFile != null) {
+      showSubmittedPopup(context);
       print('Image Path: ${imageFile!.path}');
       List<int> bytes = await File(imageFile!.path).readAsBytes();
       socket.emit("ur_mom", {'IDK': 'anymore'});
@@ -364,6 +365,7 @@ class _CameraPageState extends State<CameraPage> {
       await FFmpegKit.execute(
         '-i ${inputFile.path} -vf scale=854:480 -c:a copy $outputFilePath',
       );
+      showSubmittedPopup(context);
       List<int> bytes = await File(outputFilePath).readAsBytes();
       socket.emit("report_danger_site", {
         'file_data': bytes,
@@ -388,7 +390,6 @@ class _CameraPageState extends State<CameraPage> {
       selectedDisasterOption = 'Road Accident';
     });
     socket.on("report_danger_site_result", (data) {
-      showSubmittedPopup(context);
       print(data);
     });
   }
