@@ -344,7 +344,6 @@ class _CameraPageState extends State<CameraPage> {
     if (imageFile != null) {
       print('Image Path: ${imageFile!.path}');
       List<int> bytes = await File(imageFile!.path).readAsBytes();
-      print("killmepls");
       socket.emit("ur_mom", {'IDK': 'anymore'});
       socket.emit("report_danger_site", {
         'file_data': bytes,
@@ -358,9 +357,7 @@ class _CameraPageState extends State<CameraPage> {
         'extension': '.jpg',
         'text': noteTextController.text,
       });
-      print("killmepls");
     } else if (videoFile != null) {
-      print('Video Path: ${videoFile!.path}');
       final inputFile = File(videoFile!.path);
       final outputDir = await getTemporaryDirectory();
       final outputFilePath = '${outputDir.path}/compressed_video.mp4';
@@ -390,7 +387,10 @@ class _CameraPageState extends State<CameraPage> {
       noteTextController.clear();
       selectedDisasterOption = 'Road Accident';
     });
-    socket.on("report_danger_site_result", (data) => print(data));
+    socket.on("report_danger_site_result", (data) {
+      showSubmittedPopup(context);
+      print(data);
+    });
   }
 
   void showPopup(BuildContext context) {
@@ -401,6 +401,27 @@ class _CameraPageState extends State<CameraPage> {
           title: const Text("No image or video file."),
           content: const Text(
               "Please select a valid image or video file before submitting."),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showSubmittedPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Thank you for reporting."),
+          content: const Text(
+              "Your report has successfully been sent for verification. Help will arrive soon."),
           actions: [
             ElevatedButton(
               onPressed: () {
